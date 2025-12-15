@@ -1,0 +1,302 @@
+/* ======================================================= */
+/* 1. 全体設定とフォント */
+/* ======================================================= */
+body {
+    font-family: 'Noto Serif JP', 'Montserrat', sans-serif; /* 日本語と英語のフォント設定 */
+    color: #333; /* 基本の文字色 */
+}
+
+h1, h2, h3, h4, .text-uppercase, .navbar-brand {
+    font-family: 'Montserrat', sans-serif; /* 見出しはシャープな欧文フォント */
+    font-weight: 700;
+}
+
+/* リンクボタンのスタイル調整 */
+.btn-primary {
+    background-color: #A38C8D; /* メインカラーを設定 */
+    border-color: #A38C8D;
+}
+.btn-primary:hover {
+    background-color: #8C7C7D;
+    border-color: #8C7C7D;
+}
+.btn-outline-primary {
+    color: #A38C8D;
+    border-color: #A38C8D;
+}
+.btn-outline-primary:hover {
+    background-color: #A38C8D;
+    color: white;
+}
+/* Bootstrapのプライマリテキストカラーをカスタムカラーに上書き */
+.text-primary {
+    color: #A38C8D !important;
+}
+
+/* ======================================================= */
+/* 2. メインビジュアル (背景が動く演出の土台) */
+/* ======================================================= */
+.masthead {
+    min-height: 100vh;
+    padding: 0;
+    background-image: url('../images/main-background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* パララックス効果の核 */
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.masthead::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 40%の黒の透明度 */
+    z-index: -1;
+}
+
+.masthead .container {
+    text-align: center;
+    padding-top: 200px;
+    padding-bottom: 50px;
+    z-index: 2;
+}
+
+.masthead-heading {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2rem;
+}
+
+.masthead-subheading {
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.masthead-date {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+/* ======================================================= */
+/* 3. ナビゲーションバー (固定メニュー) */
+/* ======================================================= */
+#mainNav {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 0.3s ease;
+}
+
+#mainNav .navbar-brand {
+    color: #F8F8F8;
+    font-size: 1.5rem;
+}
+
+/* ======================================================= */
+/* 4. ストーリー / タイムライン (沿革) スタイル */
+/* ======================================================= */
+.timeline {
+    list-style: none;
+    padding: 0;
+    position: relative;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    margin-left: -1px;
+    background-color: #e9ecef;
+}
+
+.timeline > li {
+    margin-bottom: 50px;
+    position: relative;
+    min-height: 50px;
+}
+
+.timeline-image {
+    position: absolute;
+    left: 50%;
+    z-index: 100;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    background-color: #A38C8D;
+    color: white;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 80px;
+    font-size: 1.5rem;
+}
+
+.timeline-panel {
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    background-color: #fff;
+    position: relative;
+}
+
+.timeline > li:nth-child(even) .timeline-panel {
+    float: right;
+    margin-right: 0;
+}
+
+.timeline > li:nth-child(odd) .timeline-panel {
+    float: left;
+    margin-left: 0;
+}
+
+@media (max-width: 992px) {
+    .timeline:before {
+        left: 30px; 
+    }
+    .timeline > li {
+        margin-left: 70px;
+        margin-right: 0;
+    }
+    .timeline-panel {
+        width: 100%;
+    }
+    .timeline-image {
+        left: 0;
+        margin-left: 0;
+        transform: translateX(-50%);
+    }
+    .timeline > li .timeline-panel,
+    .timeline > li:nth-child(even) .timeline-panel {
+        float: none;
+    }
+}
+
+/* ======================================================= */
+/* 5. スケジュール / カードスタイル */
+/* ======================================================= */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+}
+
+.card-title {
+    color: #A38C8D !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* ======================================================= */
+/* 6. メニューセクション スタイル */
+/* ======================================================= */
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.menu-item .card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.menu-item .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.menu-item .card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.menu-item .card-body {
+    padding: 1.5rem;
+}
+
+.menu-item .card-title {
+    margin-bottom: 0.5rem;
+}
+
+/* ======================================================= */
+/* 7. アクセスセクション スタイル */
+/* ======================================================= */
+.map-container {
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    /* 埋め込みマップをレスポンシブ対応させる */
+    width: 100%;
+    height: 100%;
+}
+
+/* ======================================================= */
+/* 8. ギャラリーセクション スタイル */
+/* ======================================================= */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #eee; /* 写真がない場合のプレースホルダー色 */
+    min-height: 200px;
+    display: flex; /* 画像がない場合に中央寄せするため */
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item img {
+    /* マウスオーバーで拡大・画像を暗くするエフェクト */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    filter: brightness(0.9);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.0);
+}
+
+/* ======================================================= */
+/* 9. フッタースタイル */
+/* ======================================================= */
+.footer {
+    background-color: #343a40; /* ダークな背景色 */
+    color: white;
+}
+.footer .text-muted {
+    color: #ccc !important;
+}
+.footer .link-dark {
+    color: white !important;
+    font-weight: 500;
+}
+
+/* ======================================================= */
+/* 10. カスタムJS用スタイル */
+/* ======================================================= */
+
+/* ナビゲーションバーがトップにあるときの透過スタイル（既存） */
+#mainNav {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* スクロールしてトップから離れたときに適用されるスタイル */
+#mainNav.navbar-shrink {
+    background-color: #343a40; /* 不透明なダークグレー */
+    /* 必要に応じて、ここで文字色を調整しても良い */
+}
