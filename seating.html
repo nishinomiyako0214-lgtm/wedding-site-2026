@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【結婚式】〇〇 & 〇〇 - Seating (配席確認)</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"> 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        #auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px); /* フッターなどを除く高さ */
+            text-align: center;
+        }
+        .mobile-header {
+            display: none !important; /* 初期表示ではヘッダーを隠す */
+        }
+        #seating-content {
+            display: none; /* 初期表示ではコンテンツを隠す */
+            padding-top: 100px; /* ヘッダーが表示された時の調整 */
+        }
+        .auth-error {
+            color: #dc3545;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body id="page-top">
+
+    <header class="mobile-header">
+        <div class="site-title"><a href="index.html">O & H Wedding</a></div>
+
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
+            <i class="fas fa-bars"></i> 
+        </button>
+
+        <nav id="primary-navigation" data-visible="false">
+            <ul>
+                <li><a href="index.html">TOP</a></li>
+                <li><a href="concept.html">コンセプト</a></li>
+                <li><a href="schedule.html">スケジュール</a></li>
+                <li><a href="story.html">私たちの物語</a></li>
+                <li><a href="menu.html">メニュー</a></li>
+                <li><a href="access.html">アクセス</a></li>
+                <li><a href="gallery.html">ギャラリー</a></li>
+                <li><a href="share.html">写真共有</a></li>
+                <li class="nav-button"><a href="seating.html">配席確認</a></li>
+                <li class="nav-button"><a href="[出欠確認フォームURL]" target="_blank">ご回答 (RSVP)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div id="auth-container">
+        <div class="card p-5 shadow-lg" style="max-width: 400px; width: 100%;">
+            <h4 class="text-primary mb-4">配席確認ページ</h4>
+            <p>ゲスト専用ページです。パスワードを入力してください。</p>
+            <div class="input-group mb-3">
+                <input type="password" id="password-input" class="form-control" placeholder="パスワードを入力">
+                <button class="btn btn-primary" type="button" onclick="checkPassword()">
+                    認証
+                </button>
+            </div>
+            <p id="auth-message" class="auth-error"></p>
+        </div>
+    </div>
+
+
+    <section class="page-section" id="seating-content">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Seating Chart</h2>
+                <h3 class="section-subheading text-muted mb-5">
+                    お客様のテーブル名と席次をご確認ください
+                </h3>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    
+                    <div class="card p-4 mb-5 shadow-sm" data-aos="fade-up">
+                        <h4 class="text-primary mb-3"><i class="fas fa-search me-2"></i> お客様の配席を検索</h4>
+                        <p class="text-muted small">
+                            ご自身のお名前（フルネーム）を入力して検索ボタンを押してください。
+                        </p>
+                        <div class="input-group">
+                            <input type="text" id="guest-search" class="form-control" placeholder="例: 〇〇 太郎">
+                            <button class="btn btn-outline-primary" type="button" onclick="searchSeating()">検索</button>
+                        </div>
+                        <div id="search-result" class="mt-3">
+                            <div class="alert alert-info" role="alert">
+                                検索結果がここに表示されます。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-4 mb-5 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="text-primary mb-3"><i class="fas fa-map me-2"></i> 会場レイアウト</h4>
+                        <p class="text-muted small">
+                            当日の会場のテーブル配置図です。ご自身のテーブルをご確認ください。
+                        </p>
+                        <img src="images/seating-layout-placeholder.jpg" class="img-fluid rounded shadow" alt="会場の席次表レイアウト" loading="lazy">
+                    </div>
+                    
+                    <div class="text-center mt-5">
+                        <p class="text-muted small">
+                            配席に関するご不明点は、当日のスタッフにお声がけください。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start text-muted">Copyright © O & H Wedding 2026</div>
+                <div class="col-lg-4 my-3 my-lg-0 text-center">
+                    <p class="mb-0 small text-muted">Thank you for coming!</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="link-dark text-decoration-none me-3" href="#page-top">Topへ戻る</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a id="back-to-top" href="#page-top" class="btn btn-primary shadow-lg d-none">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script> 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="js/scripts.js"></script>
+
+    <script>
+        // ★★★ 🚨 ここにパスワードを設定してください 🚨 ★★★
+        const CORRECT_PASSWORD = '1122'; 
+        // **********************************************
+        
+        const authContainer = document.getElementById('auth-container');
+        const seatingContent = document.getElementById('seating-content');
+        const passwordInput = document.getElementById('password-input');
+        const authMessage = document.getElementById('auth-message');
+        const header = document.querySelector('.mobile-header');
+        const footer = document.querySelector('.footer');
+
+        function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+
+            if (enteredPassword === CORRECT_PASSWORD) {
+                // 認証成功
+                authContainer.style.display = 'none';
+                seatingContent.style.display = 'block';
+                header.style.display = 'flex'; // ヘッダーを表示
+                footer.style.display = 'block'; // フッターを表示
+                document.body.classList.remove('no-scroll');
+                
+                // AOS初期化を再実行 (コンテンツが表示されてからアニメーションを適用するため)
+                if (typeof AOS !== 'undefined') {
+                    AOS.init();
+                }
+            } else {
+                // 認証失敗
+                authMessage.textContent = 'パスワードが違います。';
+                passwordInput.value = ''; // 入力欄をクリア
+            }
+        }
+
+        // ゲスト検索機能のプレースホルダー (実際には大規模な席次データをJSで処理する必要があります)
+        function searchSeating() {
+            const guestName = document.getElementById('guest-search').value.trim();
+            const resultElement = document.getElementById('search-result');
+
+            if (guestName === "") {
+                resultElement.innerHTML = `<div class="alert alert-warning" role="alert">お名前を入力してください。</div>`;
+                return;
+            }
+
+            // ★★★ 実際はここに席次データの検索ロジックを実装 ★★★
+            // 例: ゲスト名が "田中 華子" なら "テーブルC / No.12" と表示する
+            if (guestName.includes('〇〇')) {
+                resultElement.innerHTML = `
+                    <div class="alert alert-success" role="alert">
+                        <strong>${guestName}様:</strong><br>
+                        <strong>テーブル:</strong> 友人テーブルC<br>
+                        <strong>席次番号:</strong> 12番
+                    </div>
+                `;
+            } else {
+                resultElement.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        恐れ入りますが、該当のお名前が見つかりませんでした。
+                    </div>
+                `;
+            }
+        }
+
+        // Enterキーで認証を試みる
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // ページロード時の初期設定
+        document.addEventListener('DOMContentLoaded', () => {
+            // ヘッダーとフッターを非表示に設定 (CSSの初期設定で既に非表示だが念のため)
+            header.style.display = 'none';
+            footer.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>

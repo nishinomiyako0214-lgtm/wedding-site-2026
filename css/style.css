@@ -88,18 +88,121 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 /* ======================================================= */
 /* 3. ナビゲーションバー (固定メニュー) */
 /* ======================================================= */
-#mainNav {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: background-color 0.3s ease;
+/* ======================================================= */
+/* 3. ナビゲーションバー (カスタムハンバーガーメニュー) */
+/* ======================================================= */
+
+/* Bootstrapの固定ヘッダーは使用しないため、上書き */
+.fixed-top {
+    position: static !important;
 }
 
-#mainNav .navbar-brand {
-    color: #F8F8F8;
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: white; /* ヘッダーの背景色 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky; /* スクロールしてもメニューを固定 */
+    top: 0;
+    z-index: 1000; 
+}
+
+.site-title a {
     font-size: 1.5rem;
+    font-weight: 700;
+    color: #A38C8D; /* メインカラーを使用 */
+    text-decoration: none;
 }
 
+/* --- ハンバーガーボタン --- */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 2000;
+    color: #333; /* アイコンの色 */
+    font-size: 1.2rem;
+}
+
+/* --- メニュー本体（モバイル非表示）--- */
+#primary-navigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%; 
+    max-width: 300px; /* メニューの最大幅を制限 */
+    height: 100%;
+    background: rgba(255, 255, 255, 0.98); 
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transform: translateX(100%); /* 画面外に隠す */
+    transition: transform 0.3s ease-in-out;
+    z-index: 1500;
+    padding-top: 5rem;
+}
+
+#primary-navigation[data-visible="true"] {
+    transform: translateX(0%); /* 表示 */
+}
+
+#primary-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#primary-navigation li {
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+#primary-navigation li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 1.1rem;
+    display: block;
+    width: 100%;
+}
+
+.nav-button a {
+    color: #A38C8D; 
+    font-weight: bold;
+}
+
+/* --- PC/タブレット用スタイル (メニューの常時表示) --- */
+@media (min-width: 992px) { 
+    .mobile-header {
+        position: static;
+        box-shadow: none;
+    }
+    .menu-toggle {
+        display: none; 
+    }
+    #primary-navigation {
+        all: unset;
+        display: flex;
+        align-items: center;
+        width: auto;
+        padding-top: 0;
+        margin-left: auto; /* 右寄せ */
+    }
+    #primary-navigation ul {
+        flex-direction: row; /* 横並びに戻す */
+        gap: 1.5rem;
+    }
+    #primary-navigation li {
+        padding: 0;
+        border: none;
+    }
+    #primary-navigation li a {
+        font-size: 1rem;
+        color: #333;
+    }
+}
 /* ======================================================= */
 /* 4. ストーリー / タイムライン (沿革) スタイル */
 /* ======================================================= */
@@ -271,6 +374,13 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     filter: brightness(1.0);
 }
 
+@media (max-width: 576px) {
+    /* スマートフォンでは、ギャラリーを強制的に2列表示にする */
+    .gallery-item {
+        /* Bootstrapのcol-lg-4, col-md-6を使っているため、ここでは強制的な調整は不要ですが、*/
+        /* 適切な余白を確保するため、画像が縦長になりすぎないよう調整 */
+    }
+}
 /* ======================================================= */
 /* 9. フッタースタイル */
 /* ======================================================= */
@@ -286,17 +396,75 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     font-weight: 500;
 }
 
-/* ======================================================= */
-/* 10. カスタムJS用スタイル */
-/* ======================================================= */
 
-/* ナビゲーションバーがトップにあるときの透過スタイル（既存） */
-#mainNav {
-    background-color: rgba(0, 0, 0, 0.7);
+/* ======================================================= */
+/* 11. カウントダウンタイマーのスタイル (新規追加) */
+/* ======================================================= */
+#countdown {
+    text-align: center;
+    color: white; 
+    text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    margin-top: 2rem;
 }
 
-/* スクロールしてトップから離れたときに適用されるスタイル */
-#mainNav.navbar-shrink {
-    background-color: #343a40; /* 不透明なダークグレー */
-    /* 必要に応じて、ここで文字色を調整しても良い */
+#timer-display {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0.5rem;
+}
+
+.timer-unit {
+    display: inline-block;
+    font-size: 3rem; 
+    font-weight: 700;
+    line-height: 1.2;
+    padding: 0 0.5rem;
+    color: #fff; /* 数字は白 */
+}
+
+.timer-label {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    align-self: flex-end; 
+    padding-bottom: 0.8rem;
+    margin-right: 1rem;
+    letter-spacing: 0.1em;
+}
+
+/* モバイルでの調整 */
+@media (max-width: 576px) {
+    .timer-unit {
+        font-size: 2rem;
+    }
+    .timer-label {
+        font-size: 0.8rem;
+        padding-bottom: 0.4rem;
+        margin-right: 0.5rem;
+    }
+}
+/* ======================================================= */
+/* 12. TOPへ戻るボタンのスタイル (新規追加) */
+/* ======================================================= */
+#back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; 
+    font-size: 1.5rem;
+    line-height: 55px;
+    text-align: center;
+    z-index: 990; 
+    padding: 0;
+    opacity: 0.9;
+    transition: opacity 0.3s, background-color 0.3s;
+}
+
+#back-to-top:hover {
+    opacity: 1;
+    background-color: #8C7C7D; /* Hover時もトーンを合わせる */
 }
