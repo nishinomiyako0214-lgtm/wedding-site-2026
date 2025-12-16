@@ -36,20 +36,33 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 /* ======================================================= */
 /* 2. メインビジュアル (背景が動く演出の土台) */
 /* ======================================================= */
+/* ======================================================= */
+/* 2. メインビジュアル (背景が動く演出の土台) */
+/* ======================================================= */
 .masthead {
-    /* 修正: スクロールをなくし、画面ぴったり100%の高さに固定 */
-    height: 100vh; 
-    min-height: 100vh; 
+    /* 修正: ヘッダーとフッターの高さを考慮し、計算して高さを決定 */
+    height: calc(100vh - 66px); /* 100vhからヘッダーとフッターの合計高さを引く (仮の数値) */
+    min-height: calc(100vh - 66px); /* min-heightも同様に調整 */
     padding: 0;
     background-image: url('../images/main-background.JPG');
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-position: center center;
-    /* 修正: 画面を隙間なく覆う（スクロールをなくすため） */
     background-size: cover; 
     position: relative;
     z-index: 1;
 }
+
+/* モバイル時の調整 (モバイルヘッダーが大きいため、高さを調整) */
+@media (max-width: 991px) {
+    .masthead {
+        /* モバイルヘッダーの高さが約65px、フッターが約65pxと仮定 */
+        height: calc(100vh - 130px); 
+        min-height: calc(100vh - 130px);
+    }
+}
+
+/* ... .masthead に関する他のスタイルはそのまま ... */
 
 .masthead::before {
     content: '';
@@ -102,21 +115,15 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 
 .mobile-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* 左右に要素を広げる */
     align-items: center;
     padding: 1rem 1.5rem;
-    background: white; /* ヘッダーの背景色 */
+    background: white; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky; /* スクロールしてもメニューを固定 */
+    position: sticky; 
     top: 0;
     z-index: 1000; 
-}
-
-.site-title a {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #A38C8D; /* メインカラーを使用 */
-    text-decoration: none;
+    width: 100%; /* 追記: ヘッダーが画面全体に広がるように保証 */
 }
 
 /* --- ハンバーガーボタン --- */
@@ -125,12 +132,13 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    z-index: 2000;
+    z-index: 2000; /* 修正なし: 最前面にあるためOK */
     color: #333; 
-    /* 修正/追記: ユニコード記号のサイズと配置を調整 */
-    font-size: 2rem; /* サイズを大きく */
-    line-height: 1; /* 中央に配置 */
+    font-size: 2rem; 
+    line-height: 1; 
     height: 1em;
+    /* 追記: ボタンが右端に確実に位置するように余白をリセット */
+    margin-left: auto;
 }
 /* --- メニュー本体（モバイル非表示）--- */
 #primary-navigation {
