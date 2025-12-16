@@ -37,13 +37,16 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 /* 2. メインビジュアル (背景が動く演出の土台) */
 /* ======================================================= */
 .masthead {
-    min-height: 100vh;
+    /* 修正: スクロールをなくし、画面ぴったり100%の高さに固定 */
+    height: 100vh; 
+    min-height: 100vh; 
     padding: 0;
     background-image: url('../images/main-background.JPG');
     background-repeat: no-repeat;
-    background-attachment: fixed; /* パララックス効果の核 */
+    background-attachment: fixed; 
     background-position: center center;
-    background-size: contain;
+    /* 修正: 画面を隙間なく覆う（スクロールをなくすため） */
+    background-size: cover; 
     position: relative;
     z-index: 1;
 }
@@ -123,10 +126,12 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     cursor: pointer;
     padding: 0.5rem;
     z-index: 2000;
-    color: #333; /* アイコンの色 */
-    font-size: 1.2rem;
+    color: #333; 
+    /* 修正/追記: ユニコード記号のサイズと配置を調整 */
+    font-size: 2rem; /* サイズを大きく */
+    line-height: 1; /* 中央に配置 */
+    height: 1em;
 }
-
 /* --- メニュー本体（モバイル非表示）--- */
 #primary-navigation {
     position: fixed;
