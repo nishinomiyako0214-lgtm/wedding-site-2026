@@ -34,10 +34,7 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 }
 
 /* ======================================================= */
-/* 2. メインビジュアル (背景が動く演出の土台) */
-/* ======================================================= */
-/* ======================================================= */
-/* 2. メインビジュアル (背景が動く演出の土台) */
+/* 2. メインビジュアル (背景が動く演出の土台) - 【修正適用済】 */
 /* ======================================================= */
 .masthead {
     /* 修正: ヘッダーとフッターの高さを考慮し、計算して高さを決定 */
@@ -48,12 +45,12 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-position: center center;
-    background-size: cover; 
+    background-size: cover; /* 修正: 画面全体を覆い、スクロールをなくす */
     position: relative;
     z-index: 1;
 }
 
-/* モバイル時の調整 (モバイルヘッダーが大きいため、高さを調整) */
+/* モバイル時の調整 (モバイルヘッダーが大きいため、高さを調整) - 【修正適用済】 */
 @media (max-width: 991px) {
     .masthead {
         /* モバイルヘッダーの高さが約65px、フッターが約65pxと仮定 */
@@ -61,8 +58,6 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
         min-height: calc(100vh - 130px);
     }
 }
-
-/* ... .masthead に関する他のスタイルはそのまま ... */
 
 .masthead::before {
     content: '';
@@ -102,10 +97,7 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 }
 
 /* ======================================================= */
-/* 3. ナビゲーションバー (固定メニュー) */
-/* ======================================================= */
-/* ======================================================= */
-/* 3. ナビゲーションバー (カスタムハンバーガーメニュー) */
+/* 3. ナビゲーションバー (カスタムハンバーガーメニュー) - 【修正適用済】 */
 /* ======================================================= */
 
 /* Bootstrapの固定ヘッダーは使用しないため、上書き */
@@ -115,7 +107,7 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 
 .mobile-header {
     display: flex;
-    justify-content: space-between; /* 左右に要素を広げる */
+    justify-content: space-between; /* 修正: 左右に要素を広げ、ボタンを右寄せ */
     align-items: center;
     padding: 1rem 1.5rem;
     background: white; 
@@ -123,7 +115,7 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     position: sticky; 
     top: 0;
     z-index: 1000; 
-    width: 100%; /* 追記: ヘッダーが画面全体に広がるように保証 */
+    width: 100%; /* 修正: ヘッダーが画面全体に広がるように保証 */
 }
 
 /* --- ハンバーガーボタン --- */
@@ -132,14 +124,15 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    z-index: 2000; /* 修正なし: 最前面にあるためOK */
+    z-index: 2000; 
     color: #333; 
+    /* 修正: ユニコード記号 (☰) のサイズと配置を調整 */
     font-size: 2rem; 
     line-height: 1; 
     height: 1em;
-    /* 追記: ボタンが右端に確実に位置するように余白をリセット */
-    margin-left: auto;
+    /* margin-left: auto; は justify-content: space-between があるため、削除しました */
 }
+
 /* --- メニュー本体（モバイル非表示）--- */
 #primary-navigation {
     position: fixed;
