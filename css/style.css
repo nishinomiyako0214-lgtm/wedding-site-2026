@@ -39,7 +39,7 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
 .masthead {
     min-height: 100vh;
     padding: 0;
-    background-image: url('../images/main-background.jpg');
+    background-image: url('../images/main-background.JPG');
     background-repeat: no-repeat;
     background-attachment: fixed; /* パララックス効果の核 */
     background-position: center center;
