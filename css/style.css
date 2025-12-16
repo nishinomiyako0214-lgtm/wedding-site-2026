@@ -43,7 +43,7 @@ h1, h2, h3, h4, .text-uppercase, .navbar-brand {
     background-repeat: no-repeat;
     background-attachment: fixed; /* パララックス効果の核 */
     background-position: center center;
-    background-size: cover;
+    background-size: contain;
     position: relative;
     z-index: 1;
 }
