@@ -1,476 +1,697 @@
 /* ======================================================= */
-/* 1. 全体設定とフォント */
+/* 0. Design System & Variables */
+/* ======================================================= */
+:root {
+    /* Colors: Kamakura Nature x Camping */
+    --color-primary: #2C4A3B;
+    /* Deep Forest Green */
+    --color-secondary: #5C6F5A;
+    /* Muted Green */
+    --color-accent: #C5A065;
+    /* Gold/Brass (Camping Gear/Sun) */
+    --color-bg: #F9F8F6;
+    /* Warm Off-white */
+    --color-text: #2D2D2D;
+    /* Charcoal */
+    --color-text-light: #6C757D;
+
+    /* Typography */
+    --font-en: 'Montserrat', sans-serif;
+    --font-jp: 'Noto Serif JP', serif;
+
+    /* Spacing */
+    --spacing-sm: 1rem;
+    --spacing-md: 3rem;
+    --spacing-lg: 5rem;
+
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-slow: 0.6s ease;
+}
+
+/* ======================================================= */
+/* 1. Reset & Global Styles */
 /* ======================================================= */
 body {
-    font-family: 'Noto Serif JP', 'Montserrat', sans-serif; /* 日本語と英語のフォント設定 */
-    color: #333; /* 基本の文字色 */
+    font-family: var(--font-jp);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.8;
+    overflow-x: hidden;
 }
 
-h1, h2, h3, h4, .text-uppercase, .navbar-brand {
-    font-family: 'Montserrat', sans-serif; /* 見出しはシャープな欧文フォント */
+h1,
+h2,
+h3,
+h4,
+.text-uppercase,
+.navbar-brand {
+    font-family: var(--font-en);
     font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
-/* リンクボタンのスタイル調整 */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+.section-padding {
+    padding: var(--spacing-lg) 0;
+}
+
+.text-accent {
+    color: var(--color-accent) !important;
+}
+
+/* Button Styles */
 .btn-primary {
-    background-color: #A38C8D; /* メインカラーを設定 */
-    border-color: #A38C8D;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-family: var(--font-en);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition-fast);
 }
+
 .btn-primary:hover {
-    background-color: #8C7C7D;
-    border-color: #8C7C7D;
-}
-.btn-outline-primary {
-    color: #A38C8D;
-    border-color: #A38C8D;
-}
-.btn-outline-primary:hover {
-    background-color: #A38C8D;
-    color: white;
-}
-/* Bootstrapのプライマリテキストカラーをカスタムカラーに上書き */
-.text-primary {
-    color: #A38C8D !important;
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    transform: translateY(-2px);
 }
 
 /* ======================================================= */
-/* 2. メインビジュアル (背景が動く演出の土台) - 【修正適用済】 */
+/* 2. Header & Navigation */
 /* ======================================================= */
-.masthead {
-    /* 修正: ヘッダーとフッターの高さを考慮し、計算して高さを決定 */
-    height: calc(100vh - 66px); /* 100vhからヘッダーとフッターの合計高さを引く (仮の数値) */
-    min-height: calc(100vh - 66px); /* min-heightも同様に調整 */
-    padding: 0;
-    background-image: url('../images/main-background.JPG');
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-position: center center;
-    background-size: cover; /* 修正: 画面全体を覆い、スクロールをなくす */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition-fast);
+    background: transparent;
+    /* transparent initally */
+}
+
+.site-header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px 30px;
+}
+
+.site-logo {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
+    /* White on hero */
+    z-index: 2000;
+    /* Above overlay */
     position: relative;
-    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* モバイル時の調整 (モバイルヘッダーが大きいため、高さを調整) - 【修正適用済】 */
-@media (max-width: 991px) {
-    .masthead {
-        /* モバイルヘッダーの高さが約65px、フッターが約65pxと仮定 */
-        height: calc(100vh - 130px); 
-        min-height: calc(100vh - 130px);
+.site-header.scrolled .site-logo {
+    color: var(--color-primary);
+    text-shadow: none;
+}
+
+/* Hamburger Button */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2000;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger-lines {
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    position: relative;
+    transition: var(--transition-fast);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hamburger-lines::before,
+.hamburger-lines::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    transition: var(--transition-fast);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hamburger-lines::before {
+    transform: translateY(-8px);
+}
+
+.hamburger-lines::after {
+    transform: translateY(8px);
+}
+
+.site-header.scrolled .hamburger-lines,
+.site-header.scrolled .hamburger-lines::before,
+.site-header.scrolled .hamburger-lines::after {
+    background: var(--color-primary);
+    box-shadow: none;
+}
+
+/* Hamburger Open State */
+.menu-toggle[aria-expanded="true"] .hamburger-lines {
+    background: transparent;
+    box-shadow: none;
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger-lines::before {
+    transform: rotate(45deg);
+    background: #fff;
+    /* Always white on overlay */
+}
+
+.menu-toggle[aria-expanded="true"] .hamburger-lines::after {
+    transform: rotate(-45deg);
+    background: #fff;
+}
+
+/* Full Screen Navigation Overlay */
+.fullscreen-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-primary);
+    display: flex;
+    /* Flexbox for centering */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.fullscreen-nav[data-visible="true"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fullscreen-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.fullscreen-nav li {
+    margin: 1.5rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Staggered Animation Delay for List Items */
+.fullscreen-nav[data-visible="true"] li:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(6) {
+    transition-delay: 0.6s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(7) {
+    transition-delay: 0.7s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(8) {
+    transition-delay: 0.8s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(9) {
+    transition-delay: 0.9s;
+}
+
+.fullscreen-nav[data-visible="true"] li:nth-child(10) {
+    transition-delay: 1.0s;
+}
+
+.fullscreen-nav[data-visible="true"] li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fullscreen-nav a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+    font-family: var(--font-en);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.fullscreen-nav a:hover {
+    color: var(--color-accent);
+}
+
+.nav-button-mobile {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent) !important;
+    border-radius: 30px;
+}
+
+.nav-button-mobile:hover {
+    background: var(--color-accent);
+    color: #fff !important;
+}
+
+/* Desktop Nav (Hidden by default, shown on large screens) */
+@media (min-width: 992px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .fullscreen-nav {
+        position: static;
+        width: auto;
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        background: transparent;
+        flex-direction: row;
+        transform: none;
+    }
+
+    .fullscreen-nav ul {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .fullscreen-nav li {
+        margin: 0;
+        opacity: 1;
+        transform: none;
+        transition: none;
+        /* Reset transition */
+    }
+
+    .fullscreen-nav a {
+        font-size: 1rem;
+        color: #fff;
+        /* White on hero */
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .site-header.scrolled .fullscreen-nav a {
+        color: var(--color-primary);
+        text-shadow: none;
+    }
+
+    .nav-button-mobile {
+        margin-top: 0;
+        padding: 8px 20px;
+        border-color: #fff;
+        color: #fff !important;
+        font-size: 0.9rem;
+    }
+
+    .site-header.scrolled .nav-button-mobile {
+        border-color: var(--color-primary);
+        color: var(--color-primary) !important;
+    }
+
+    .site-header.scrolled .nav-button-mobile:hover {
+        background: var(--color-primary);
+        color: #fff !important;
     }
 }
 
-.masthead::before {
-    content: '';
+
+/* ======================================================= */
+/* 3. Hero Section */
+/* ======================================================= */
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* 40%の黒の透明度 */
+    background-image: url('../images/main-background.JPG');
+    background-size: cover;
+    background-position: center;
     z-index: -1;
 }
 
-.masthead .container {
+/* Gradient Overlay for better text readability */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(44, 74, 59, 0.4),
+            /* Primary Green at top */
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(44, 74, 59, 0.6)
+            /* Darker at bottom */
+        );
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
     text-align: center;
-    padding-top: 200px;
-    padding-bottom: 50px;
-    z-index: 2;
+    color: #fff;
+    padding: 0 20px;
 }
 
-.masthead-heading {
-    font-size: 3rem;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.2rem;
-}
-
-.masthead-subheading {
-    font-size: 1.5rem;
-    font-style: italic;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-}
-
-.masthead-date {
+.hero-subtitle {
     font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    display: block;
+    color: var(--color-accent);
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-names {
+    font-size: 2rem;
+    font-family: var(--font-jp);
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+.hero-date-box {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 10px 30px;
+    backdrop-filter: blur(5px);
+}
+
+.hero-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: var(--font-en);
+}
+
+.hero-location {
+    font-size: 0.9rem;
+    font-family: var(--font-jp);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: #fff;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.scroll-indicator span {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background: #fff;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-names {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+
+/* ======================================================= */
+/* 4. Content Sections */
+/* ======================================================= */
+.section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.section-title .jp {
+    display: block;
+    font-size: 1rem;
+    font-family: var(--font-jp);
+    color: var(--color-text-light);
     font-weight: 400;
 }
 
-/* ======================================================= */
-/* 3. ナビゲーションバー (カスタムハンバーガーメニュー) - 【修正適用済】 */
-/* ======================================================= */
-
-/* Bootstrapの固定ヘッダーは使用しないため、上書き */
-.fixed-top {
-    position: static !important;
-}
-
-.mobile-header {
-    display: flex;
-    justify-content: space-between; /* 修正: 左右に要素を広げ、ボタンを右寄せ */
-    align-items: center;
-    padding: 1rem 1.5rem;
-    background: white; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky; 
-    top: 0;
-    z-index: 1000; 
-    width: 100%; /* 修正: ヘッダーが画面全体に広がるように保証 */
-}
-
-/* --- ハンバーガーボタン --- */
-.menu-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 2000; 
-    color: #333; 
-    /* 修正: ユニコード記号 (☰) のサイズと配置を調整 */
-    font-size: 2rem; 
-    line-height: 1; 
-    height: 1em;
-    /* margin-left: auto; は justify-content: space-between があるため、削除しました */
-}
-
-/* --- メニュー本体（モバイル非表示）--- */
-#primary-navigation {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%; 
-    max-width: 300px; /* メニューの最大幅を制限 */
-    height: 100%;
-    background: rgba(255, 255, 255, 0.98); 
-    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-    transform: translateX(100%); /* 画面外に隠す */
-    transition: transform 0.3s ease-in-out;
-    z-index: 1500;
-    padding-top: 5rem;
-}
-
-#primary-navigation[data-visible="true"] {
-    transform: translateX(0%); /* 表示 */
-}
-
-#primary-navigation ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#primary-navigation li {
-    padding: 0.8rem 1.5rem;
-    border-bottom: 1px solid #eee;
-}
-
-#primary-navigation li a {
-    text-decoration: none;
-    color: #555;
-    font-size: 1.1rem;
-    display: block;
-    width: 100%;
-}
-
-.nav-button a {
-    color: #A38C8D; 
-    font-weight: bold;
-}
-
-/* --- PC/タブレット用スタイル (メニューの常時表示) --- */
-@media (min-width: 992px) { 
-    .mobile-header {
-        position: static;
-        box-shadow: none;
-    }
-    .menu-toggle {
-        display: none; 
-    }
-    #primary-navigation {
-        all: unset;
-        display: flex;
-        align-items: center;
-        width: auto;
-        padding-top: 0;
-        margin-left: auto; /* 右寄せ */
-    }
-    #primary-navigation ul {
-        flex-direction: row; /* 横並びに戻す */
-        gap: 1.5rem;
-    }
-    #primary-navigation li {
-        padding: 0;
-        border: none;
-    }
-    #primary-navigation li a {
-        font-size: 1rem;
-        color: #333;
-    }
-}
-/* ======================================================= */
-/* 4. ストーリー / タイムライン (沿革) スタイル */
-/* ======================================================= */
+/* Timeline/Story */
 .timeline {
-    list-style: none;
-    padding: 0;
     position: relative;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.timeline:before {
+.timeline::before {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
     left: 50%;
     width: 2px;
-    margin-left: -1px;
-    background-color: #e9ecef;
+    background: var(--color-secondary);
+    opacity: 0.3;
 }
 
-.timeline > li {
-    margin-bottom: 50px;
+.timeline-item {
+    margin-bottom: 60px;
     position: relative;
-    min-height: 50px;
 }
 
-.timeline-image {
+.timeline-date {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    font-family: var(--font-en);
+    font-weight: 700;
     position: absolute;
     left: 50%;
-    z-index: 100;
-    width: 80px;
-    height: 80px;
-    margin-left: -40px;
-    background-color: #A38C8D;
-    color: white;
-    border-radius: 100%;
-    text-align: center;
-    line-height: 80px;
-    font-size: 1.5rem;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 2;
 }
 
-.timeline-panel {
-    width: 40%;
-    padding: 20px;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-    background-color: #fff;
-    position: relative;
+.timeline-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 45%;
 }
 
-.timeline > li:nth-child(even) .timeline-panel {
-    float: right;
-    margin-right: 0;
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-left: auto;
 }
 
-.timeline > li:nth-child(odd) .timeline-panel {
-    float: left;
-    margin-left: 0;
+.timeline-item:nth-child(even) .timeline-content {
+    margin-right: auto;
 }
 
-@media (max-width: 992px) {
-    .timeline:before {
-        left: 30px; 
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
     }
-    .timeline > li {
-        margin-left: 70px;
-        margin-right: 0;
+
+    .timeline-date {
+        left: 20px;
+        transform: none;
     }
-    .timeline-panel {
-        width: 100%;
-    }
-    .timeline-image {
-        left: 0;
-        margin-left: 0;
-        transform: translateX(-50%);
-    }
-    .timeline > li .timeline-panel,
-    .timeline > li:nth-child(even) .timeline-panel {
-        float: none;
+
+    .timeline-content {
+        width: 85%;
+        margin-left: 50px !important;
+        margin-top: 40px;
     }
 }
 
-/* ======================================================= */
-/* 5. スケジュール / カードスタイル */
-/* ======================================================= */
+/* Menu & Cards */
 .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 10px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: var(--transition-fast);
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2rem;
 }
 
 .card-title {
-    color: #A38C8D !important;
-    font-size: 1.1rem;
-    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
 }
 
-/* ======================================================= */
-/* 6. メニューセクション スタイル */
-/* ======================================================= */
-.bg-light {
-    background-color: #f8f9fa !important;
+/* Countdown */
+.countdown-box {
+    background: rgba(44, 74, 59, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    color: #fff;
+    max-width: 600px;
+    margin: -50px auto 50px;
+    /* Overlap hero */
+    position: relative;
+    z-index: 20;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.menu-item .card {
-    border-radius: 15px;
-    overflow: hidden;
+/* Footer */
+.site-footer {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 3rem 0;
+    text-align: center;
 }
 
-.menu-item .card-img-top {
-    height: 200px;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+.footer-text {
+    opacity: 0.7;
+    font-size: 0.9rem;
 }
 
-.menu-item .card:hover .card-img-top {
-    transform: scale(1.05);
+/* Utility & Extras */
+.d-none {
+    display: none !important;
 }
 
-.menu-item .card-body {
-    padding: 1.5rem;
+.text-center {
+    text-align: center;
 }
 
-.menu-item .card-title {
+.mb-2 {
     margin-bottom: 0.5rem;
 }
 
-/* ======================================================= */
-/* 7. アクセスセクション スタイル */
-/* ======================================================= */
-.map-container {
-    height: 450px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.map-container iframe {
-    /* 埋め込みマップをレスポンシブ対応させる */
-    width: 100%;
-    height: 100%;
-}
-
-/* ======================================================= */
-/* 8. ギャラリーセクション スタイル */
-/* ======================================================= */
-.gallery-item {
-    overflow: hidden;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: #eee; /* 写真がない場合のプレースホルダー色 */
-    min-height: 200px;
-    display: flex; /* 画像がない場合に中央寄せするため */
-    align-items: center;
-    justify-content: center;
-}
-
-.gallery-item img {
-    /* マウスオーバーで拡大・画像を暗くするエフェクト */
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    filter: brightness(0.9);
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-    filter: brightness(1.0);
-}
-
-@media (max-width: 576px) {
-    /* スマートフォンでは、ギャラリーを強制的に2列表示にする */
-    .gallery-item {
-        /* Bootstrapのcol-lg-4, col-md-6を使っているため、ここでは強制的な調整は不要ですが、*/
-        /* 適切な余白を確保するため、画像が縦長になりすぎないよう調整 */
-    }
-}
-/* ======================================================= */
-/* 9. フッタースタイル */
-/* ======================================================= */
-.footer {
-    background-color: #343a40; /* ダークな背景色 */
-    color: white;
-}
-.footer .text-muted {
-    color: #ccc !important;
-}
-.footer .link-dark {
-    color: white !important;
-    font-weight: 500;
-}
-
-
-/* ======================================================= */
-/* 11. カウントダウンタイマーのスタイル (新規追加) */
-/* ======================================================= */
-#countdown {
-    text-align: center;
-    color: white; 
-    text-shadow: 0 0 5px rgba(0,0,0,0.7);
-    margin-top: 2rem;
-}
-
-#timer-display {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 0.5rem;
-}
-
-.timer-unit {
-    display: inline-block;
-    font-size: 3rem; 
-    font-weight: 700;
-    line-height: 1.2;
-    padding: 0 0.5rem;
-    color: #fff; /* 数字は白 */
-}
-
-.timer-label {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 400;
-    align-self: flex-end; 
-    padding-bottom: 0.8rem;
-    margin-right: 1rem;
-    letter-spacing: 0.1em;
-}
-
-/* モバイルでの調整 */
-@media (max-width: 576px) {
-    .timer-unit {
-        font-size: 2rem;
-    }
-    .timer-label {
-        font-size: 0.8rem;
-        padding-bottom: 0.4rem;
-        margin-right: 0.5rem;
-    }
-}
-/* ======================================================= */
-/* 12. TOPへ戻るボタンのスタイル (新規追加) */
-/* ======================================================= */
 #back-to-top {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%; 
-    font-size: 1.5rem;
-    line-height: 55px;
-    text-align: center;
-    z-index: 990; 
-    padding: 0;
-    opacity: 0.9;
-    transition: opacity 0.3s, background-color 0.3s;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    /* Centering icon if added */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 900;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 #back-to-top:hover {
-    opacity: 1;
-    background-color: #8C7C7D; /* Hover時もトーンを合わせる */
+    background: var(--color-primary);
+    transform: translateY(-5px);
+}
+
+#back-to-top::after {
+    content: '↑';
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Responsive Utilities */
+@media (max-width: 576px) {
+    .section-padding {
+        padding: var(--spacing-md) 0;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
 }

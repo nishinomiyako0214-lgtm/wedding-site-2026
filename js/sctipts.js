@@ -1,123 +1,132 @@
 /*!
-* Start: Custom scripts for Wedding Site (Multi-Page and Custom Menu)
+* Start: Custom scripts for Wedding Site (Redesign)
 */
 
 document.addEventListener('DOMContentLoaded', () => {
     
     // ===========================================
-    // 1. AOS (アニメーション) の初期化
+    // 1. AOS (Animation) Init
     // ===========================================
     if (typeof AOS !== 'undefined') {
-        AOS.init();
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 1000,
+        });
     }
 
     // ===========================================
-    // 2. ハンバーガーメニューの開閉処理とスクロールロック (セクション1と7を統合)
+    // 2. Mobile Navigation & Header Scroll
     // ===========================================
+    const header = document.querySelector('.site-header');
     const nav = document.getElementById('primary-navigation');
     const navToggle = document.querySelector('.menu-toggle');
+    const body = document.body;
 
+    // Header Scroll Effect
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on load
+
+    // Mobile Menu Toggle
     if (navToggle && nav) {
-        // メニュー開閉時の処理
         const toggleMenu = () => {
             const isVisible = nav.getAttribute('data-visible') === 'true';
-            const newVisibility = !isVisible;
-
-            nav.setAttribute('data-visible', newVisibility);
-            navToggle.setAttribute('aria-expanded', newVisibility);
-
-            // メニューが開いたときは背景のスクロールを固定
-            document.body.style.overflow = newVisibility ? 'hidden' : 'auto';
+            
+            if (!isVisible) {
+                // Open Menu
+                nav.setAttribute('data-visible', 'true');
+                navToggle.setAttribute('aria-expanded', 'true');
+                body.style.overflow = 'hidden'; // Lock Scroll
+            } else {
+                // Close Menu
+                nav.setAttribute('data-visible', 'false');
+                navToggle.setAttribute('aria-expanded', 'false');
+                body.style.overflow = 'auto'; // Unlock Scroll
+            }
         };
 
         navToggle.addEventListener('click', toggleMenu);
 
-        // リンクをクリックしたらメニューを閉じる
+        // Close menu when clicking a link
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (nav.getAttribute('data-visible') === 'true') {
-                    // クローズ処理を呼び出し
-                    toggleMenu(); 
+                    toggleMenu();
                 }
             });
         });
     }
 
     // ===========================================
-    // 3. スムーズスクロール (ページ内リンク用)
+    // 3. Smooth Scroll
     // ===========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        const targetId = anchor.getAttribute('href');
-        
-        // 外部ページへのリンクではないか、かつターゲット要素が存在するかチェック
-        if (targetId.length > 1 && document.querySelector(targetId)) {
-            anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
                 e.preventDefault();
-                document.querySelector(targetId).scrollIntoView({
+                targetElement.scrollIntoView({
                     behavior: 'smooth'
                 });
-            });
-        }
+            }
+        });
     });
 
     // ===========================================
-    // 4. TOPへ戻るボタンの表示/非表示制御 (新規追加)
+    // 4. Back to Top Button (Optional if exists in HTML)
     // ===========================================
     const backToTop = document.getElementById('back-to-top');
-
     if (backToTop) {
         const toggleBackToTop = () => {
-            // スクロール量が100pxを超えたらボタンを表示
-            if (window.scrollY > 100) {
-                backToTop.classList.remove('d-none'); // CSSの .d-none を削除して表示
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('d-none');
             } else {
-                backToTop.classList.add('d-none'); // CSSの .d-none を追加して非表示
+                backToTop.classList.add('d-none');
             }
         };
-
-        // ロード時とスクロール時に実行
         window.addEventListener('scroll', toggleBackToTop);
-        window.addEventListener('load', toggleBackToTop);
     }
 
-
     // ===========================================
-    // 5. カウントダウンタイマー機能 (index.htmlのみ実行)
+    // 5. Countdown Timer
     // ===========================================
     function startCountdown() {
-        // 🚨 ここを結婚式の日時 (JST) に置き換えてください 🚨
-        const weddingDate = new Date("November 22, 2026 15:00:00").getTime(); // 例: 2026年11月22日 15時
+        // Confirm Date: 2026.11.22
+        const weddingDate = new Date("November 22, 2026 00:00:00").getTime();
         const countdownElement = document.getElementById("timer-display");
 
-        if (!countdownElement) return; // index.html以外では実行しない
+        if (!countdownElement) return;
 
         const updateTimer = setInterval(function() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
-            // 計算
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // 表示を更新
             countdownElement.innerHTML = 
-                `<span class="timer-unit">${days}</span><span class="timer-label">日</span>` +
-                `<span class="timer-unit">${hours}</span><span class="timer-label">時間</span>` +
-                `<span class="timer-unit">${minutes}</span><span class="timer-label">分</span>` +
-                `<span class="timer-unit">${seconds}</span><span class="timer-label">秒</span>`;
+                `<span class="timer-unit">${days}</span><span class="timer-label">Days</span>` +
+                `<span class="timer-unit">${hours}</span><span class="timer-label">Hours</span>` +
+                `<span class="timer-unit">${minutes}</span><span class="timer-label">Mins</span>`;
 
-            // 終了
             if (distance < 0) {
                 clearInterval(updateTimer);
-                countdownElement.parentElement.innerHTML = "🎉 The Day Has Come! Thank you! 🎉";
+                countdownElement.innerHTML = "🎉 TODAY IS THE DAY! 🎉";
             }
         }, 1000);
     }
 
-    startCountdown(); // タイマーを開始
+    startCountdown();
 
 });
-
-/* End: Custom scripts for Wedding Site */
