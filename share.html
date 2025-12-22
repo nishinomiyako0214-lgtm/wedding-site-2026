@@ -25,14 +25,15 @@
         </button>
         <nav id="primary-navigation" class="fullscreen-nav" data-visible="false">
             <ul>
-                <li><a href="index.html">TOP</a></li>
-                <li><a href="concept.html">コンセプト</a></li>
-                <li><a href="story.html">STORY</a></li>
-                <li><a href="schedule.html">SCHEDULE</a></li>
-                <li><a href="access.html">ACCESS</a></li>
-                <li><a href="gallery.html">GALLERY</a></li>
-                <li><a href="seating.html" class="nav-button-mobile">SEATING CHART</a></li>
-                <li><a href="#" class="nav-button-mobile">RSVP</a></li>
+                <li><a href="index.html">TOP <span class="jp-label">トップ</span></a></li>
+                <li><a href="concept.html">CONCEPT <span class="jp-label">コンセプト</span></a></li>
+                <li><a href="story.html">STORY <span class="jp-label">おふたりの物語</span></a></li>
+                <li><a href="menu.html">CUISINE <span class="jp-label">お料理</span></a></li>
+                <li><a href="schedule.html">SCHEDULE <span class="jp-label">当日の流れ</span></a></li>
+                <li><a href="access.html">ACCESS <span class="jp-label">アクセス</span></a></li>
+                <li><a href="gallery.html">GALLERY <span class="jp-label">ギャラリー</span></a></li>
+                <li><a href="share.html">SHARE PHOTOS <span class="jp-label">写真共有</span></a></li>
+                <li><a href="seating.html">SEATING CHART <span class="jp-label">配席表</span></a></li>
             </ul>
         </nav>
     </header>
@@ -45,78 +46,99 @@
         </div>
     </div>
 
-    <section class="page-section pt-5" id="share">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">Photo Share</h2>
-                <h3 class="section-subheading text-muted mb-5">
-                    当日の写真の撮影と共有について
-                </h3>
+    <!-- Auth Container -->
+    <div id="auth-container"
+        style="display: flex; justify-content: center; align-items: center; min-height: 50vh; padding: 2rem;">
+        <div class="card p-5 shadow-lg" style="max-width: 400px; width: 100%;">
+            <h4 class="text-primary mb-4 text-center">Photo Share</h4>
+            <p class="text-center">ゲスト専用ページです。<br>パスワードを入力してください。</p>
+            <div class="input-group mb-3">
+                <input type="password" id="password-input" class="form-control" placeholder="パスワードを入力">
+                <button class="btn btn-primary" type="button" onclick="checkPassword()">
+                    認証
+                </button>
             </div>
+            <p id="auth-message" class="text-danger text-center"></p>
+        </div>
+    </div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
+    <!-- Protected Content (Hidden by default) -->
+    <div id="protected-content" style="display: none;">
+        <section class="page-section pt-5" id="share">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Photo Share</h2>
+                    <h3 class="section-subheading text-muted mb-5">
+                        当日の写真の撮影と共有について
+                    </h3>
+                </div>
 
-                    <div class="card p-4 mb-5 shadow" data-aos="fade-up">
-                        <h4 class="text-primary mb-3"><i class="fas fa-camera-retro me-2"></i> ゲストの皆様へのお願い</h4>
-                        <p class="lead">
-                            当日は、皆様お手持ちのカメラやスマートフォンで自由に撮影をお楽しみください！
-                        </p>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
 
-                        <h5 class="mt-4">お願いと注意事項</h5>
-                        <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle me-2 text-primary"></i> **SNS投稿について:**
-                                ご自身の写真や感想の投稿は大歓迎です！ただし、他のゲストやスタッフが写っている場合は、プライバシーにご配慮をお願いいたします。</li>
-                            <li><i class="fas fa-check-circle me-2 text-primary"></i> **ハッシュタグ:**
-                                よろしければ以下のハッシュタグをご利用ください。<br>
-                                <strong class="ms-4 text-uppercase">#dk_wedding2026</strong>
-                            </li>
-                            <li><i class="fas fa-exclamation-triangle me-2 text-primary"></i> **挙式中の撮影:**
-                                挙式中はプロのカメラマンがいるため、**お席からのフラッシュ撮影、および立ち上がっての撮影**はご遠慮ください。</li>
-                        </ul>
-                    </div>
+                        <div class="card p-4 mb-5 shadow" data-aos="fade-up">
+                            <h4 class="text-primary mb-3"><i class="fas fa-camera-retro me-2"></i> ゲストの皆様へのお願い</h4>
+                            <p class="lead">
+                                当日は、皆様お手持ちのカメラやスマートフォンで自由に撮影をお楽しみください！
+                            </p>
 
-                    <div class="card p-4 mb-5 shadow" data-aos="fade-up" data-aos-delay="300">
-                        <h4 class="text-primary mb-3"><i class="fas fa-images me-2"></i> 写真の共有方法</h4>
-                        <p>
-                            皆様が撮影してくださった写真は、新郎新婦宛にぜひ送ってください！二人の大切な思い出になります。
-                        </p>
+                            <h5 class="mt-4">お願いと注意事項</h5>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check-circle me-2 text-primary"></i> **SNS投稿について:**
+                                    ご自身の写真や感想の投稿は大歓迎です！ただし、他のゲストやスタッフが写っている場合は、プライバシーにご配慮をお願いいたします。</li>
+                                <li><i class="fas fa-check-circle me-2 text-primary"></i> **ハッシュタグ:**
+                                    よろしければ以下のハッシュタグをご利用ください。<br>
+                                    <strong class="ms-4 text-uppercase">#dk_wedding2026</strong>
+                                </li>
+                                <li><i class="fas fa-exclamation-triangle me-2 text-primary"></i> **挙式中の撮影:**
+                                    挙式中はプロのカメラマンがいるため、**お席からのフラッシュ撮影、および立ち上がっての撮影**はご遠慮ください。</li>
+                            </ul>
+                        </div>
 
-                        <div class="row mt-4">
-                            <div class="col-md-6 mb-3">
-                                <h5 class="text-primary"><i class="fas fa-cloud-upload-alt me-2"></i> Google Photos /
-                                    LINEアルバム</h5>
-                                <p class="small">後日、こちらのページにて共有用のアルバムURLを公開予定です。皆様の写真をアップロードをお願いします。</p>
-                                <a href="[共有アルバムURL]" target="_blank" class="btn btn-outline-primary btn-sm disabled">
-                                    準備中 (後日公開)
-                                </a>
-                            </div>
+                        <div class="card p-4 mb-5 shadow" data-aos="fade-up" data-aos-delay="300">
+                            <h4 class="text-primary mb-3"><i class="fas fa-images me-2"></i> 写真の共有方法</h4>
+                            <p>
+                                皆様が撮影してくださった写真は、新郎新婦宛にぜひ送ってください！二人の大切な思い出になります。
+                            </p>
 
-                            <div class="col-md-6 mb-3">
-                                <h5 class="text-primary"><i class="fas fa-download me-2"></i> 新郎新婦からの写真配布</h5>
-                                <p class="small">プロカメラマンが撮影した公式写真も、結婚式後〇週間以内にこちらのページでダウンロードできるようにします。</p>
-                                <a href="[ダウンロードURL]" target="_blank" class="btn btn-primary btn-sm disabled">
-                                    Coming Soon
-                                </a>
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-3">
+                                    <h5 class="text-primary"><i class="fas fa-cloud-upload-alt me-2"></i> Google Photos
+                                        /
+                                        LINEアルバム</h5>
+                                    <p class="small">後日、こちらのページにて共有用のアルバムURLを公開予定です。皆様の写真をアップロードをお願いします。</p>
+                                    <a href="[共有アルバムURL]" target="_blank"
+                                        class="btn btn-outline-primary btn-sm disabled">
+                                        準備中 (後日公開)
+                                    </a>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <h5 class="text-primary"><i class="fas fa-download me-2"></i> 新郎新婦からの写真配布</h5>
+                                    <p class="small">プロカメラマンが撮影した公式写真も、結婚式後〇週間以内にこちらのページでダウンロードできるようにします。</p>
+                                    <a href="[ダウンロードURL]" target="_blank" class="btn btn-primary btn-sm disabled">
+                                        Coming Soon
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12 text-center">
-                    <p class="mb-0 footer-text">Copyright © Dai & Kanako Wedding 2026</p>
-                    <p class="mb-0 footer-text">Thank you for coming!</p>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 text-center">
+                        <p class="mb-0 footer-text">Copyright © Dai & Kanako Wedding 2026</p>
+                        <p class="mb-0 footer-text">Thank you for coming!</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <a id="back-to-top" href="#page-top" class="btn btn-primary shadow-lg d-none">
         <i class="fas fa-chevron-up"></i>
@@ -128,6 +150,35 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="js/scripts.js"></script>
+
+    <script>
+        const CORRECT_PASSWORD = 'HASE20260223';
+        const authContainer = document.getElementById('auth-container');
+        const protectedContent = document.getElementById('protected-content');
+        const passwordInput = document.getElementById('password-input');
+        const authMessage = document.getElementById('auth-message');
+
+        function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+            if (enteredPassword === CORRECT_PASSWORD) {
+                authContainer.style.display = 'none';
+                protectedContent.style.display = 'block';
+                // Trigger AOS refresh if needed
+                if (typeof AOS !== 'undefined') {
+                    setTimeout(() => AOS.refresh(), 100);
+                }
+            } else {
+                authMessage.textContent = 'パスワードが違います。';
+                passwordInput.value = '';
+            }
+        }
+
+        passwordInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
 </body>
 
 </html>
