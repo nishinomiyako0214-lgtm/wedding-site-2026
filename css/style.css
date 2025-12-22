@@ -695,3 +695,90 @@ a:hover {
         font-size: 2.5rem;
     }
 }
+
+/* Masonry Gallery Styles */
+.masonry-grid {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+@media (max-width: 992px) {
+    .masonry-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 576px) {
+    .masonry-grid {
+        column-count: 1;
+    }
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gallery-link {
+    display: block;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.gallery-link img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+/* Hover Effect: Zoom & Overlay */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 74, 59, 0.7);
+    /* Deep Green tint */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-overlay i {
+    color: #fff;
+    font-size: 2rem;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.gallery-link:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-link:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-link:hover .gallery-overlay i {
+    transform: scale(1);
+}
+
+/* Refined Modal */
+.modal-content {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.modal-body img {
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}

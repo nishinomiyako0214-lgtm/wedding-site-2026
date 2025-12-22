@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>【結婚式】〇〇 & 〇〇 - Seating (配席確認)</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -15,47 +18,55 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 100px); /* フッターなどを除く高さ */
+            min-height: calc(100vh - 100px);
+            /* フッターなどを除く高さ */
             text-align: center;
         }
+
         .mobile-header {
-            display: none !important; /* 初期表示ではヘッダーを隠す */
+            display: none !important;
+            /* 初期表示ではヘッダーを隠す */
         }
+
         #seating-content {
-            display: none; /* 初期表示ではコンテンツを隠す */
-            padding-top: 100px; /* ヘッダーが表示された時の調整 */
+            display: none;
+            /* 初期表示ではコンテンツを隠す */
+            padding-top: 100px;
+            /* ヘッダーが表示された時の調整 */
         }
+
         .auth-error {
             color: #dc3545;
             margin-top: 1rem;
         }
     </style>
 </head>
+
 <body id="page-top">
 
-    <header class="mobile-header">
-        <div class="site-title"><a href="index.html">O & H Wedding</a></div>
-
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
-            <i class="fas fa-bars"></i> 
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="site-logo">D & K Wedding</div>
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Menu">
+            <div class="hamburger-lines"></div>
         </button>
-
-        <nav id="primary-navigation" data-visible="false">
+        <nav id="primary-navigation" class="fullscreen-nav" data-visible="false">
             <ul>
                 <li><a href="index.html">TOP</a></li>
-                <li><a href="concept.html">コンセプト</a></li>
-                <li><a href="schedule.html">スケジュール</a></li>
-                <li><a href="story.html">私たちの物語</a></li>
-                <li><a href="menu.html">メニュー</a></li>
-                <li><a href="access.html">アクセス</a></li>
-                <li><a href="gallery.html">ギャラリー</a></li>
-                <li><a href="share.html">写真共有</a></li>
-                <li class="nav-button"><a href="seating.html">配席確認</a></li>
-                <li class="nav-button"><a href="[出欠確認フォームURL]" target="_blank">ご回答 (RSVP)</a></li>
+                <li><a href="concept.html">CONCEPT</a></li>
+                <li><a href="story.html">STORY</a></li>
+                <li><a href="menu.html">CUISINE</a></li>
+                <li><a href="schedule.html">SCHEDULE</a></li>
+                <li><a href="access.html">ACCESS</a></li>
+                <li><a href="gallery.html">GALLERY</a></li>
+                <li><a href="share.html">SHARE PHOTOS</a></li>
+                <li><a href="seating.html" class="nav-button-mobile">SEATING CHART</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Spacer for fixed header -->
+    <div style="height: 80px;"></div>
 
     <div id="auth-container">
         <div class="card p-5 shadow-lg" style="max-width: 400px; width: 100%;">
@@ -80,10 +91,10 @@
                     お客様のテーブル名と席次をご確認ください
                 </h3>
             </div>
-            
+
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    
+
                     <div class="card p-4 mb-5 shadow-sm" data-aos="fade-up">
                         <h4 class="text-primary mb-3"><i class="fas fa-search me-2"></i> お客様の配席を検索</h4>
                         <p class="text-muted small">
@@ -99,15 +110,16 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card p-4 mb-5 shadow-sm" data-aos="fade-up" data-aos-delay="200">
                         <h4 class="text-primary mb-3"><i class="fas fa-map me-2"></i> 会場レイアウト</h4>
                         <p class="text-muted small">
                             当日の会場のテーブル配置図です。ご自身のテーブルをご確認ください。
                         </p>
-                        <img src="images/seating-layout-placeholder.jpg" class="img-fluid rounded shadow" alt="会場の席次表レイアウト" loading="lazy">
+                        <img src="images/seating-layout-placeholder.jpg" class="img-fluid rounded shadow"
+                            alt="会場の席次表レイアウト" loading="lazy">
                     </div>
-                    
+
                     <div class="text-center mt-5">
                         <p class="text-muted small">
                             配席に関するご不明点は、当日のスタッフにお声がけください。
@@ -119,15 +131,12 @@
         </div>
     </section>
 
-    <footer class="footer py-4">
+    <footer class="site-footer">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-start text-muted">Copyright © O & H Wedding 2026</div>
-                <div class="col-lg-4 my-3 my-lg-0 text-center">
-                    <p class="mb-0 small text-muted">Thank you for coming!</p>
-                </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a class="link-dark text-decoration-none me-3" href="#page-top">Topへ戻る</a>
+                <div class="col-lg-12 text-center">
+                    <p class="mb-0 footer-text">Copyright © Dai & Kanako Wedding 2026</p>
+                    <p class="mb-0 footer-text">Thank you for coming!</p>
                 </div>
             </div>
         </div>
@@ -139,16 +148,16 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script> 
+    <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
+
     <script src="js/scripts.js"></script>
 
     <script>
         // ★★★ 🚨 ここにパスワードを設定してください 🚨 ★★★
-        const CORRECT_PASSWORD = '1122'; 
+        const CORRECT_PASSWORD = '1122';
         // **********************************************
-        
+
         const authContainer = document.getElementById('auth-container');
         const seatingContent = document.getElementById('seating-content');
         const passwordInput = document.getElementById('password-input');
@@ -166,7 +175,7 @@
                 header.style.display = 'flex'; // ヘッダーを表示
                 footer.style.display = 'block'; // フッターを表示
                 document.body.classList.remove('no-scroll');
-                
+
                 // AOS初期化を再実行 (コンテンツが表示されてからアニメーションを適用するため)
                 if (typeof AOS !== 'undefined') {
                     AOS.init();
@@ -208,7 +217,7 @@
         }
 
         // Enterキーで認証を試みる
-        passwordInput.addEventListener('keypress', function(e) {
+        passwordInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 checkPassword();
             }
@@ -223,4 +232,5 @@
 
     </script>
 </body>
+
 </html>
