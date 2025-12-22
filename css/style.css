@@ -243,55 +243,83 @@ a:hover {
     width: 40px;
     height: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
 .hamburger-lines {
-    width: 30px;
-    height: 2px;
-    background: #fff;
+    display: block;
     position: relative;
-    transition: var(--transition-fast);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    width: 24px;
+    height: 20px;
 }
 
 .hamburger-lines::before,
 .hamburger-lines::after {
     content: '';
+    display: block;
     position: absolute;
-    width: 100%;
     height: 2px;
-    background: #fff;
+    width: 100%;
+    background: #2D2D2D;
+    /* Default dark */
     transition: var(--transition-fast);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    left: 0;
 }
 
+/* Top Line */
 .hamburger-lines::before {
-    transform: translateY(-8px);
+    top: 0;
 }
 
+/* Bottom Line */
 .hamburger-lines::after {
-    transform: translateY(8px);
+    top: 8px;
+    /* Spacing for 2 lines */
 }
 
-.site-header.scrolled .hamburger-lines,
+/* MENU Text */
+.menu-toggle::after {
+    content: 'MENU';
+    position: absolute;
+    bottom: 0;
+    font-size: 9px;
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #2D2D2D;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Color adjustment for Hero (White) vs Scrolled (Dark) */
+/* Initial State (on Hero) - White Lines & Text */
+.site-header:not(.scrolled) .hamburger-lines::before,
+.site-header:not(.scrolled) .hamburger-lines::after {
+    background: #fff;
+}
+
+.site-header:not(.scrolled) .menu-toggle::after {
+    color: #fff;
+}
+
+/* Scrolled State - Dark Lines & Text */
 .site-header.scrolled .hamburger-lines::before,
 .site-header.scrolled .hamburger-lines::after {
     background: var(--color-primary);
-    box-shadow: none;
 }
 
-/* Hamburger Open State */
-.menu-toggle[aria-expanded="true"] .hamburger-lines {
-    background: transparent;
-    box-shadow: none;
+.site-header.scrolled .menu-toggle::after {
+    color: var(--color-primary);
 }
 
+/* Active/Open State */
 .menu-toggle[aria-expanded="true"] .hamburger-lines::before {
     transform: rotate(45deg);
-    background: #fff;
-    /* Always white on overlay */
+    top: 9px;
 }
 
 .menu-toggle[aria-expanded="true"] .hamburger-lines::after {
