@@ -1,6 +1,6 @@
 /**
- * Simple Particle Network Animation
- * Creates a "constellation" effect with connected nodes.
+ * Campfire Sparks Animation
+ * Simulates rising sparks connecting to form constellations.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,8 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let particles = [];
 
     // Configuration
-    const particleCount = 60;
-    const connectionDistance = 150;
+    // Mobile: fewer particles, Desktop: more
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 40 : 80;
+    const connectionDistance = isMobile ? 100 : 150;
     const mouseDistance = 200;
 
     // Resize handling
@@ -39,23 +41,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Particle Class
     class Particle {
         constructor() {
+            this.init(true); // true = random start position
+        }
+
+        init(randomY = false) {
             this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 1.5;
-            this.vy = (Math.random() - 0.5) * 1.5;
-            this.size = Math.random() * 2 + 1;
-            this.color = 'rgba(197, 160, 101, 0.8)'; // accent gold
+            // randomY: start anywhere (init), otherwise start at bottom (respawn)
+            this.y = randomY ? Math.random() * height : height + 10;
+
+            // Upward velocity (rising sparks)
+            this.vx = (Math.random() - 0.5) * 1; // Slight drift
+            this.vy = -(Math.random() * 2 + 0.5); // Upward speed
+
+            this.size = Math.random() * 3 + 1;
+            this.life = 1; // Alpha/Life
+            this.decay = Math.random() * 0.005 + 0.002;
+
+            // Fire Colors: Orange, Gold, Red-ish
+            const colors = ['255, 165, 0', '255, 215, 0', '255, 69, 0', '255, 140, 0'];
+            this.colorBase = colors[Math.floor(Math.random() * colors.length)];
         }
 
         update() {
             this.x += this.vx;
             this.y += this.vy;
+            this.life -= this.decay;
 
-            // Bounce off edges
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
-
-            // Mouse interaction
+            // Mouse Interaction (push away or attract? Attract feels like "connecting")
             if (mouse.x != null) {
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
@@ -64,29 +76,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     const forceDirectionX = dx / distance;
                     const forceDirectionY = dy / distance;
                     const force = (mouseDistance - distance) / mouseDistance;
-                    const directionX = forceDirectionX * force * 0.6;
-                    const directionY = forceDirectionY * force * 0.6;
-                    this.vx += directionX;
-                    this.vy += directionY;
+                    // Attract gently
+                    this.vx += forceDirectionX * force * 0.05;
+                    this.vy += forceDirectionY * force * 0.05;
                 }
+            }
+
+            // Respawn if off screen or dead
+            if (this.y < -10 || this.life <= 0 || this.x < 0 || this.x > width) {
+                this.init(false);
             }
         }
 
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
+            ctx.fillStyle = `rgba(${this.colorBase}, ${this.life})`;
             ctx.fill();
         }
     }
 
     // Initialize particles
-    function init() {
+    function initParticles() {
         particles = [];
         for (let i = 0; i < particleCount; i++) {
             particles.push(new Particle());
         }
     }
+
+    initParticles();
 
     // Animation Loop
     function animate() {
@@ -102,9 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dy = particles[i].y - particles[j].y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
 
+                // Connect only if close enough
                 if (distance < connectionDistance) {
                     ctx.beginPath();
-                    ctx.strokeStyle = `rgba(197, 160, 101, ${1 - distance / connectionDistance})`; // Gold lines
+                    // Color is mix of both or gold
+                    // Alpha based on distance AND lowest life of the pair
+                    const opacity = (1 - distance / connectionDistance) * Math.min(particles[i].life, particles[j].life);
+                    ctx.strokeStyle = `rgba(255, 200, 100, ${opacity})`; // Warm Gold Lines
                     ctx.lineWidth = 1;
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
@@ -115,6 +137,5 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
     }
 
-    init();
     animate();
 });
