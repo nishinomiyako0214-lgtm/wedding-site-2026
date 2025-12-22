@@ -334,7 +334,8 @@ a:hover {
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: var(--color-primary);
+    /* Dark Night Sky Background for Campfire Effect */
+    background: linear-gradient(135deg, #1a2e25 0%, #2C4A3B 100%);
     display: flex;
     /* Flexbox for centering */
     flex-direction: column;
@@ -344,6 +345,19 @@ a:hover {
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    /* Contain canvas */
+}
+
+/* Nav Background Canvas */
+.fullscreen-nav .campfire-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .fullscreen-nav[data-visible="true"] {
@@ -484,6 +498,11 @@ a:hover {
         background: transparent;
         flex-direction: row;
         transform: none;
+    }
+
+    /* Hide canvas on desktop nav bar mode */
+    .fullscreen-nav .campfire-canvas {
+        display: none;
     }
 
     .fullscreen-nav ul {
@@ -813,8 +832,8 @@ a:hover {
 .site-footer {
     background-color: var(--color-primary);
     color: #fff;
-    padding: 5rem 0 6rem;
-    /* Top padding for wave, Bottom for mobile button */
+    padding: 1.5rem 0;
+    /* Minimal padding for mobile */
     text-align: center;
     position: relative;
     /* For wave positioning */
@@ -823,7 +842,8 @@ a:hover {
 
 @media (min-width: 992px) {
     .site-footer {
-        padding-bottom: 3rem;
+        padding: 3rem 0;
+        /* Comfortable padding for desktop */
     }
 }
 
@@ -1023,11 +1043,16 @@ a:hover {
 /* ======================================================= */
 
 /* Auth Background Canvas */
+/* Auth Background Canvas */
 #auth-container {
-    padding-top: 10%;
-    /* Move content up */
+    padding-top: 15vh;
+    /* Move content up to reveal campfire */
+    padding-left: 20px;
+    padding-right: 20px;
     align-items: flex-start !important;
     /* Align to top */
+    display: flex;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #1a2e25 0%, #2C4A3B 100%);
@@ -1055,6 +1080,9 @@ a:hover {
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.5);
     margin: 0 auto;
+    width: 100%;
+    max-width: 360px;
+    /* Nice balanced width */
 }
 
 /* Wave Animation */
