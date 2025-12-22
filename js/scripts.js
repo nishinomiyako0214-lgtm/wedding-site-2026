@@ -127,6 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    startCountdown();
+    // ===========================================
+    // 6. Hero Slideshow
+    // ===========================================
+    const slides = document.querySelectorAll('.hero-slide');
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        const slideInterval = 5000; // 5 seconds
+
+        setInterval(() => {
+            // Remove active class from current
+            slides[currentSlide].classList.remove('active');
+
+            // Calculate next
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            // Add active class to next
+            slides[currentSlide].classList.add('active');
+        }, slideInterval);
+    }
 
 });

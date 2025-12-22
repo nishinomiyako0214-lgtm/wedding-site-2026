@@ -69,6 +69,110 @@ a:hover {
     color: var(--color-accent) !important;
 }
 
+/* Slideshow Styles */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+/* Subpage Hero Header */
+.page-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.page-hero-title {
+    position: relative;
+    color: #fff;
+    font-size: 3rem;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.page-hero-subtitle {
+    position: relative;
+    color: rgba(255, 255, 255, 0.9);
+    z-index: 1;
+    font-family: var(--font-jp);
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Specific Page Backgrounds */
+.bg-concept {
+    background-image: url('../images/main-background.JPG');
+}
+
+.bg-story {
+    background-image: url('../images/menu-appetizer.JPG');
+}
+
+.bg-schedule {
+    background-image: url('../images/menu-meat.JPG');
+}
+
+.bg-menu {
+    background-image: url('../images/menu-fish.JPG');
+}
+
+.bg-access {
+    background-image: url('../images/menu-drink.JPG');
+}
+
+.bg-gallery {
+    background-image: url('../images/menu-dessert.JPG');
+}
+
+.bg-seating {
+    background-image: url('../images/main-background.JPG');
+}
+
+.bg-share {
+    background-image: url('../images/menu-appetizer.JPG');
+}
+
 /* Button Styles */
 .btn-primary {
     background-color: var(--color-primary);
@@ -661,6 +765,8 @@ a:hover {
     right: 30px;
     width: 50px;
     height: 50px;
+    padding: 0;
+    /* Reset Bootstrap btn padding */
     background: var(--color-accent);
     color: #fff;
     border-radius: 50%;
