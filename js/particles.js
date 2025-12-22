@@ -235,9 +235,117 @@ class Particle {
     }
 }
 
-// Initialize all canvases with class 'campfire-canvas'
+// Connection Particle System ("En" - Connections/Circle)
+class ConnectionSystem {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.width = 0;
+        this.height = 0;
+        this.particles = [];
+
+        // Configuration
+        this.isMobile = window.innerWidth < 768;
+        this.particleCount = this.isMobile ? 50 : 100;
+        this.connectionDistance = 150;
+
+        // Colors for "Various people/Connections"
+        // Wedding Palette + Accents (Soft diverse colors)
+        this.colors = [
+            '218, 165, 32', // Goldenrod (Primary)
+            '44, 74, 59',   // Dark Green (Theme)
+            '255, 127, 80', // Coral (Warmth)
+            '70, 130, 180', // Steel Blue (Trust)
+            '205, 92, 92'   // Indian Red (Passion)
+        ];
+
+        this.resize = this.resize.bind(this);
+        this.animate = this.animate.bind(this);
+
+        this.resize();
+        this.initParticles();
+        this.animate();
+
+        window.addEventListener('resize', this.resize);
+    }
+
+    resize() {
+        this.width = this.canvas.width = window.innerWidth;
+        this.height = this.canvas.height = window.innerHeight;
+    }
+
+    initParticles() {
+        this.particles = [];
+        for (let i = 0; i < this.particleCount; i++) {
+            this.particles.push(new ConnectionParticle(this.width, this.height, this.colors));
+        }
+    }
+
+    animate() {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        for (let i = 0; i < this.particles.length; i++) {
+            this.particles[i].update(this.width, this.height);
+            this.particles[i].draw(this.ctx);
+
+            // Connections
+            for (let j = i; j < this.particles.length; j++) {
+                let dx = this.particles[i].x - this.particles[j].x;
+                let dy = this.particles[i].y - this.particles[j].y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < this.connectionDistance) {
+                    this.ctx.beginPath();
+                    // Color blending or fixed color for lines? 
+                    // Let's use a subtle grey/gold for connections to unify them
+                    const opacity = (1 - distance / this.connectionDistance) * 0.5;
+                    this.ctx.strokeStyle = `rgba(150, 150, 150, ${opacity})`;
+                    this.ctx.lineWidth = 1;
+                    this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                    this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                    this.ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(this.animate);
+    }
+}
+
+class ConnectionParticle {
+    constructor(width, height, colors) {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+
+        // Random velocity (floating in all directions)
+        this.vx = (Math.random() - 0.5) * 1;
+        this.vy = (Math.random() - 0.5) * 1;
+
+        this.size = Math.random() * 3 + 2;
+
+        // Random Color
+        this.colorStr = colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    update(width, height) {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off edges (keep them in screen)
+        if (this.x < 0 || this.x > width) this.vx = -this.vx;
+        if (this.y < 0 || this.y > height) this.vy = -this.vy;
+    }
+
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgb(${this.colorStr})`;
+        ctx.fill();
+    }
+}
+
+// Initialize all canvases
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Find explicit auth canvas (legacy ID) and add class if needed
+    // 1. Existing Campfire (Auth + Menu)
     const oldAuth = document.getElementById('auth-canvas');
     if (oldAuth && !oldAuth.classList.contains('campfire-canvas')) {
         oldAuth.classList.add('campfire-canvas');
@@ -246,9 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 2. Init all
-    const canvases = document.querySelectorAll('.campfire-canvas');
-    canvases.forEach(canvas => {
+    const campfireCanvases = document.querySelectorAll('.campfire-canvas');
+    campfireCanvases.forEach(canvas => {
         new CampfireSystem(canvas);
+    });
+
+    // 2. New Connections Background
+    const connectionCanvases = document.querySelectorAll('.connection-canvas');
+    connectionCanvases.forEach(canvas => {
+        new ConnectionSystem(canvas);
     });
 });
