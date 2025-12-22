@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!countdownElement) return;
 
-        const updateTimer = setInterval(function () {
+        function update() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
@@ -121,10 +121,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 `<span class="timer-unit">${minutes}</span><span class="timer-label">Mins</span>`;
 
             if (distance < 0) {
-                clearInterval(updateTimer);
                 countdownElement.innerHTML = "🎉 TODAY IS THE DAY! 🎉";
+                return false; // Stop
             }
-        }, 1000);
+            return true; // Continue
+        }
+
+        // Run immediately
+        if (update()) {
+            const updateTimer = setInterval(function () {
+                if (!update()) {
+                    clearInterval(updateTimer);
+                }
+            }, 1000);
+        }
     }
 
     // ===========================================

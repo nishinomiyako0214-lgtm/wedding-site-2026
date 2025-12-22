@@ -793,6 +793,22 @@ a:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+.timer-unit {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: var(--font-en);
+    margin: 0 5px;
+    line-height: 1;
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    font-family: var(--font-en);
+    margin-right: 15px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
 /* Footer */
 .site-footer {
     background-color: var(--color-primary);
