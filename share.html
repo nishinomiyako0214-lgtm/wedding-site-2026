@@ -49,6 +49,9 @@
     <!-- Auth Container -->
     <div id="auth-container"
         style="display: flex; justify-content: center; align-items: center; min-height: 50vh; padding: 2rem;">
+        <!-- Canvas for Campfire Animation -->
+        <canvas id="auth-canvas"></canvas>
+
         <div class="card p-5 shadow-lg" style="max-width: 400px; width: 100%;">
             <h4 class="text-primary mb-4 text-center">Photo Share</h4>
             <p class="text-center">ゲスト専用ページです。<br>パスワードを入力してください。</p>
@@ -129,6 +132,14 @@
         </section>
 
         <footer class="site-footer">
+            <!-- Footer Wave -->
+            <div class="footer-wave">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                        fill="#F9F8F6"></path>
+                </svg>
+            </div>
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
@@ -150,6 +161,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="js/scripts.js"></script>
+    <script src="js/particles.js"></script>
 
     <script>
         const CORRECT_PASSWORD = 'HASE20260223';

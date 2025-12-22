@@ -157,4 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, slideInterval);
     }
 
+    // Initialize Countdown
+    startCountdown();
+
 });
