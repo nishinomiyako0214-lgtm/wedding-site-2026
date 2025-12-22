@@ -3,7 +3,7 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // ===========================================
     // 1. AOS (Animation) Init
     // ===========================================
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navToggle && nav) {
         const toggleMenu = () => {
             const isVisible = nav.getAttribute('data-visible') === 'true';
-            
+
             if (!isVisible) {
                 // Open Menu
                 nav.setAttribute('data-visible', 'true');
@@ -101,13 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Countdown Timer
     // ===========================================
     function startCountdown() {
-        // Confirm Date: 2026.11.22
-        const weddingDate = new Date("November 22, 2026 00:00:00").getTime();
+        // Confirm Date: 2026.02.23
+        const weddingDate = new Date("February 23, 2026 00:00:00").getTime();
         const countdownElement = document.getElementById("timer-display");
 
         if (!countdownElement) return;
 
-        const updateTimer = setInterval(function() {
+        const updateTimer = setInterval(function () {
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-            countdownElement.innerHTML = 
+            countdownElement.innerHTML =
                 `<span class="timer-unit">${days}</span><span class="timer-label">Days</span>` +
                 `<span class="timer-unit">${hours}</span><span class="timer-label">Hours</span>` +
                 `<span class="timer-unit">${minutes}</span><span class="timer-label">Mins</span>`;

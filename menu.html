@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>【結婚式】〇〇 & 〇〇 - Menu (お料理とドリンク)</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 </head>
+
 <body id="page-top">
 
-    <header class="mobile-header">
-        <div class="site-title"><a href="index.html">O & H Wedding</a></div>
-
-        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" data-aos="fade-down" data-aos-duration="1000">
-            <i class="fas fa-bars"></i> 
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="site-logo">D & K Wedding</div>
+        <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Menu">
+            <div class="hamburger-lines"></div>
         </button>
-
-        <nav id="primary-navigation" data-visible="false">
+        <nav id="primary-navigation" class="fullscreen-nav" data-visible="false">
             <ul>
                 <li><a href="index.html">TOP</a></li>
-                <li><a href="concept.html">コンセプト</a></li>
-                <li><a href="schedule.html">スケジュール</a></li>
-                <li><a href="story.html">私たちの物語</a></li>
-                <li><a href="menu.html">メニュー</a></li>
-                <li><a href="access.html">アクセス</a></li>
-                <li><a href="gallery.html">ギャラリー</a></li>
-                <li><a href="share.html">写真共有</a></li>
-                <li class="nav-button"><a href="seating.html">配席確認</a></li>
-                <li class="nav-button"><a href="[出欠確認フォームURL]" target="_blank">ご回答 (RSVP)</a></li>
+                <li><a href="concept.html">CONCEPT</a></li>
+                <li><a href="story.html">STORY</a></li>
+                <li><a href="schedule.html">SCHEDULE</a></li>
+                <li><a href="access.html">ACCESS</a></li>
+                <li><a href="gallery.html">GALLERY</a></li>
+                <li><a href="seating.html" class="nav-button-mobile">SEATING CHART</a></li>
+                <li><a href="#" class="nav-button-mobile">RSVP</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Spacer for fixed header -->
+    <div style="height: 80px;"></div>
 
     <section class="page-section pt-5 bg-light" id="menu">
         <div class="container">
@@ -45,17 +48,17 @@
                     心を込めて選んだ、特別な日のためのおもてなし
                 </h3>
             </div>
-            
+
             <div class="row">
-                
+
                 <div class="col-lg-4 col-md-6 mb-5 menu-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="card h-100 shadow-sm">
                         <img class="card-img-top" src="images/menu-main-dish.jpg" alt="メインディッシュ">
                         <div class="card-body">
                             <h5 class="card-title">特選牛フィレ肉のグリル</h5>
-                            <p class="text-muted small">季節の新鮮野菜と赤ワインソース</p>
+                            <p class="text-muted small">鎌倉野菜と赤ワインソース</p>
                             <p class="card-text">
-                                ゲストの皆様に心から満足していただけるよう、厳選された国産牛フィレ肉を丁寧に焼き上げました。
+                                ゲストの皆様に心から満足していただけるよう、地元の新鮮な鎌倉野菜を添えた、厳選された国産牛フィレ肉をご用意しました。
                             </p>
                         </div>
                     </div>
@@ -68,7 +71,7 @@
                             <h5 class="card-title">旬の魚介と彩り野菜のテリーヌ</h5>
                             <p class="text-muted small">ハーブ香る自家製ドレッシング</p>
                             <p class="card-text">
-                                見た目も華やかな前菜。爽やかな風味でパーティーの始まりを彩ります。
+                                相模湾で獲れた新鮮な魚介を使用。見た目も華やかな前菜で、パーティーの始まりを彩ります。
                             </p>
                         </div>
                     </div>
@@ -78,10 +81,10 @@
                     <div class="card h-100 shadow-sm">
                         <img class="card-img-top" src="images/menu-dessert.jpg" alt="デザート">
                         <div class="card-body">
-                            <h5 class="card-title">オリジナル ウェディングケーキ</h5>
+                            <h5 class="card-title">オリジナル アウトドアケーキ</h5>
                             <p class="text-muted small">季節のフルーツと特製クリーム</p>
                             <p class="card-text">
-                                パティシエと相談を重ねた、私たちだけの特別なウェディングケーキをご提供します。
+                                キャンプ好きの二人がデザインした、切り株をモチーフにした特別なウェディングケーキです。
                             </p>
                         </div>
                     </div>
@@ -97,7 +100,7 @@
                                 <div class="col-md-6 text-start">
                                     <h5 class="text-primary">アルコール</h5>
                                     <ul class="list-unstyled">
-                                        <li>ビール (銘柄)</li>
+                                        <li>ビール (鎌倉ビール他)</li>
                                         <li>ワイン (赤・白)</li>
                                         <li>カクテル各種</li>
                                         <li>日本酒 / 焼酎</li>
@@ -108,12 +111,13 @@
                                     <ul class="list-unstyled">
                                         <li>オレンジジュース</li>
                                         <li>アップルジュース</li>
-                                        <li>ウーロン茶</li>
+                                        <li>ジンジャーエール (辛口)</li>
                                         <li>コーヒー / 紅茶</li>
                                     </ul>
                                 </div>
                             </div>
-                            <p class="small mt-3 text-muted">※メニュー内容は仕入れ状況により変更になる場合がございます。アレルギー対応も可能ですので、ご回答フォームにてお知らせください。</p>
+                            <p class="small mt-3 text-muted">
+                                ※メニュー内容は仕入れ状況により変更になる場合がございます。アレルギー対応も可能ですので、ご回答フォームにてお知らせください。</p>
                         </div>
                     </div>
                 </div>
@@ -122,15 +126,12 @@
     </section>
 
 
-    <footer class="footer py-4">
+    <footer class="site-footer">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-start text-muted">Copyright © O & H Wedding 2026</div>
-                <div class="col-lg-4 my-3 my-lg-0 text-center">
-                    <p class="mb-0 small text-muted">Thank you for coming!</p>
-                </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a class="link-dark text-decoration-none me-3" href="#page-top">Topへ戻る</a>
+                <div class="col-lg-12 text-center">
+                    <p class="mb-0 footer-text">Copyright © Dai & Kanako Wedding 2026</p>
+                    <p class="mb-0 footer-text">Thank you for coming!</p>
                 </div>
             </div>
         </div>
@@ -142,9 +143,10 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script> 
+    <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
+
     <script src="js/scripts.js"></script>
 </body>
+
 </html>
