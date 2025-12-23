@@ -16,6 +16,8 @@
 </head>
 
 <body id="page-top">
+    <!-- Background Animation (Hidden initially) -->
+    <canvas id="connection-canvas" class="connection-canvas" style="display: none;"></canvas>
 
     <!-- Navigation -->
     <header class="site-header">
@@ -169,6 +171,7 @@
             if (enteredPassword === CORRECT_PASSWORD) {
                 authContainer.style.display = 'none';
                 protectedContent.style.display = 'block';
+                document.getElementById('connection-canvas').style.display = 'block';
                 // Trigger AOS refresh if needed
                 if (typeof AOS !== 'undefined') {
                     setTimeout(() => AOS.refresh(), 100);
@@ -185,6 +188,7 @@
             }
         });
     </script>
+    <script src="js/effects.js"></script>
 </body>
 
 </html>

@@ -43,6 +43,8 @@
 </head>
 
 <body id="page-top">
+    <!-- Background Animation (Hidden initially) -->
+    <canvas id="connection-canvas" class="connection-canvas" style="display: none;"></canvas>
 
     <!-- Navigation -->
     <header class="site-header">
@@ -183,6 +185,7 @@
                 // 認証成功
                 authContainer.style.display = 'none';
                 seatingContent.style.display = 'block';
+                document.getElementById('connection-canvas').style.display = 'block';
                 header.style.display = 'flex'; // ヘッダーを表示
                 footer.style.display = 'block'; // フッターを表示
                 document.body.classList.remove('no-scroll');
@@ -242,6 +245,7 @@
         });
 
     </script>
+    <script src="js/effects.js"></script>
 </body>
 
 </html>
