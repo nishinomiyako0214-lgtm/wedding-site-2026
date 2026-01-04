@@ -349,8 +349,9 @@ a:hover {
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease-in-out;
-    overflow: hidden;
-    /* Contain canvas */
+    transition: all 0.4s ease-in-out;
+    overflow-y: auto;
+    /* Allow scroll if menu is too long */
 }
 
 /* Nav Background Canvas */
@@ -377,7 +378,7 @@ a:hover {
 }
 
 .fullscreen-nav li {
-    margin: 1.2rem 0;
+    margin: 0.8rem 0;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -386,7 +387,7 @@ a:hover {
 .fullscreen-nav a {
     color: #fff;
     font-family: var(--font-en);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     text-decoration: none;
     letter-spacing: 0.1em;
