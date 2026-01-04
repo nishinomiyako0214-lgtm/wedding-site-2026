@@ -173,6 +173,10 @@ a:hover {
     background-image: url('../images/menu-appetizer.JPG');
 }
 
+.bg-profile {
+    background-image: url('../images/main-background.JPG');
+}
+
 /* Button Styles */
 .btn-primary {
     background-color: var(--color-primary);
@@ -1251,4 +1255,15 @@ a:hover {
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
+}
+
+/* Profile Page */
+.profile-table th {
+    width: 40%;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.profile-table td {
+    color: var(--color-text);
 }
