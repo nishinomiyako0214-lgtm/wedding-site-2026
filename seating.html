@@ -144,13 +144,15 @@
             flex-direction: row;
             /* Horizontal flow: Takasago -> Row1 -> Row2 */
             align-items: stretch;
-            gap: 20px;
+            gap: 5px;
+            /* Tighter gap */
         }
 
         /* Column 1: Takasago (Left) */
         .column-takasago {
-            width: 120px;
-            min-width: 120px;
+            width: 80px;
+            /* Reduced width */
+            min-width: 80px;
             border-right: 2px dashed #dcb;
             display: flex;
             flex-direction: column;
@@ -164,8 +166,9 @@
         }
 
         .main-table-vertical-rect {
-            width: 60px;
-            height: 200px;
+            width: 50px;
+            /* Slightly narrower table */
+            height: 180px;
             border: 3px solid var(--color-primary);
             background-color: #fff;
             display: flex;
@@ -173,7 +176,7 @@
             justify-content: center;
             writing-mode: vertical-rl;
             text-orientation: upright;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--color-primary);
             margin-bottom: 20px;
         }
@@ -271,19 +274,62 @@
         }
 
         /* Table Label Circle */
+        /* Table Label Circle */
         .table-label-circle {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            /* Slightly larger */
+            height: 35px;
             background: #fff;
-            border: 1px solid var(--color-primary);
+            border: 2px solid var(--color-primary);
+            /* Thicker border */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-en);
+            font-family: "Noto Serif JP", serif;
+            /* Serif font */
             margin: 0 auto 10px;
             font-weight: bold;
             color: var(--color-primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Scroll Hint for Mobile */
+        .scroll-hint-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+            text-align: center;
+            color: var(--color-primary);
+            font-family: "Noto Serif JP", serif;
+            font-size: 0.9rem;
+            animation: bounce-right 2s infinite;
+            display: none;
+            /* Hidden by default, shown on mobile via media query */
+        }
+
+        @keyframes bounce-right {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(0);
+            }
+
+            40% {
+                transform: translateX(5px);
+            }
+
+            60% {
+                transform: translateX(3px);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .scroll-hint-wrapper {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -374,6 +420,11 @@
                         <p class="text-muted small mb-4">
                             当日の会場のテーブル配置図です。ご自身のテーブルをご確認ください。
                         </p>
+
+                        <!-- Scroll Hint -->
+                        <div class="scroll-hint-wrapper">
+                            <i class="fas fa-arrow-right"></i> 横にスクロールできます
+                        </div>
 
                         <!-- Seating Chart Container (Left-Oriented Vertical Stack) -->
                         <div class="seating-chart-container">
