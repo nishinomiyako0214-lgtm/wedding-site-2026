@@ -24,6 +24,113 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        .serif-font {
+            font-family: "Noto Serif JP", serif;
+        }
+
+        .table-shape-rect {
+            width: 150px;
+            height: 60px;
+            border: 2px solid var(--color-primary);
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        /* New Rectangular Guest Table Styles */
+        .guest-table-rect {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            /* Gap between left names, table, right names */
+            margin-bottom: 2rem;
+        }
+
+        .table-rect-center {
+            width: 30px;
+            height: 120px;
+            /* Tall rectangle for 7 seats */
+            border: 1px solid var(--color-primary);
+            background-color: #f0e6d2;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            /* Vertical text for table name if needed */
+        }
+
+        .guest-list-col {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 90px;
+        }
+
+        .guest-name-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .guest-name-box.empty {
+            background: transparent;
+            border: 1px dashed #eee;
+            color: #ccc;
+        }
+
+        .table-circle {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--color-primary);
+            border-radius: 50%;
+            background-color: #f0e6d2;
+            /* Light beige like the image */
+            color: var(--color-text);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .small-circle {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+
+        .seating-chart-container {
+            font-family: "Noto Serif JP", serif;
+            color: #555;
+            overflow-x: auto;
+            /* Handle overflow on small screens */
+            min-width: 900px;
+            /* Slight increase */
+        }
+
+        /* Custom scrollbar for seating chart */
+        .seating-chart-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .seating-chart-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .seating-chart-container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .seating-chart-container::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+
         #auth-container {
             display: flex;
             justify-content: center;
@@ -135,11 +242,197 @@
 
                     <div class="card p-4 mb-5 shadow-sm" data-aos="fade-up" data-aos-delay="200">
                         <h4 class="text-primary mb-3"><i class="fas fa-map me-2"></i> 会場レイアウト</h4>
-                        <p class="text-muted small">
+                        <p class="text-muted small mb-4">
                             当日の会場のテーブル配置図です。ご自身のテーブルをご確認ください。
                         </p>
-                        <img src="images/seating-layout-placeholder.jpg" class="img-fluid rounded shadow"
-                            alt="会場の席次表レイアウト" loading="lazy">
+
+                        <!-- Seating Chart Container -->
+                        <div class="seating-chart-container p-3" style="background-color: #fcfcfc;">
+                            <!-- Header Info -->
+                            <div class="row mb-5 text-center">
+                                <div class="col-md-4 text-start">
+                                    <h5 class="serif-font small mb-0">安川家</h5>
+                                    <h5 class="serif-font small">関野家</h5>
+                                    <p class="small mt-2" style="letter-spacing: 0.2em;">結婚披露宴列席者御席次表</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h2 class="serif-font mb-4"
+                                        style="color: var(--color-primary); letter-spacing: 0.2em;">DAI & KANAKO</h2>
+                                    <!-- Takasago (Main Table) -->
+                                    <div class="main-table mx-auto mb-5">
+                                        <div class="table-shape-rect"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <p class="serif-font mb-0">2026年2月23日（月）</p>
+                                    <p class="serif-font">萬屋本店にて</p>
+                                </div>
+                            </div>
+
+                            <!-- Guest Tables Layout -->
+                            <div class="row">
+                                <!-- Groom's Side (Left) -->
+                                <div class="col-6 border-end">
+                                    <div class="mb-5 text-center"><small class="text-muted">新郎側</small></div>
+
+                                    <!-- Row 1: Top Center Table -->
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="guest-table-rect">
+                                            <!-- Left Names -->
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">戎井 典子 様</div>
+                                                <div class="guest-name-box justify-content-end">戎井 裕城 様</div>
+                                                <div class="guest-name-box justify-content-end">中野 佳昭 様</div>
+                                                <div class="guest-name-box justify-content-end">中野 雅子 様</div>
+                                            </div>
+                                            <!-- Table -->
+                                            <div class="table-rect-center">
+                                                <i class="fas fa-utensils small op-50"></i>
+                                            </div>
+                                            <!-- Right Names -->
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">戎井 康史 様</div>
+                                                <div class="guest-name-box">戎井 康城 様</div>
+                                                <div class="guest-name-box">戎井 早織 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Row 2: Three Tables -->
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <!-- Table Bottom Left -->
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">中野 實 様</div>
+                                                <div class="guest-name-box justify-content-end">中野 美代子 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 力 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 圭子 様</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">安川 敬明 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box">安川 武男 様</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Table Bottom Center -->
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">安川 かおり 様</div>
+                                                <div class="guest-name-box justify-content-end">福山 雅人 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 将之 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 歩恭 様</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">安川 勝正 様</div>
+                                                <div class="guest-name-box">福山 愛 様</div>
+                                                <div class="guest-name-box">安川 翼 様</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Table Bottom Right -->
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">竹本 昂平 様</div>
+                                                <div class="guest-name-box justify-content-end">上田 裕貴 様</div>
+                                                <div class="guest-name-box justify-content-end">川潟 優輝 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">桑原 大知 様</div>
+                                                <div class="guest-name-box">石田 悠人 様</div>
+                                                <div class="guest-name-box">磯橋 優輝 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Bride's Side (Right) -->
+                                <div class="col-6">
+                                    <div class="mb-5 text-center"><small class="text-muted">新婦側</small></div>
+
+                                    <!-- Row 1: Top Center Table -->
+                                    <div class="d-flex justify-content-center mb-5">
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">勝俣 楓花 様</div>
+                                                <div class="guest-name-box justify-content-end">谷川 栞 様</div>
+                                                <div class="guest-name-box justify-content-end">阿部 明 様</div>
+                                                <div class="guest-name-box justify-content-end">玉木 美佳 様</div>
+                                            </div>
+                                            <div class="table-rect-center">
+                                                <i class="fas fa-utensils small op-50"></i>
+                                            </div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">大辻 佳輝 様</div>
+                                                <div class="guest-name-box">嶋村 直生 様</div>
+                                                <div class="guest-name-box">五十嵐 潤 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Row 2: Three Tables -->
+                                    <div class="d-flex justify-content-center gap-3">
+                                        <!-- Bottom Left -->
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">佐藤 菜々子 様</div>
+                                                <div class="guest-name-box justify-content-end">馬目 帆乃香 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">佐治 朋夏 様</div>
+                                                <div class="guest-name-box">鈴木 芹香 様</div>
+                                                <div class="guest-name-box">守田 彩音 様</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Bottom Center -->
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">関野 あい子 様</div>
+                                                <div class="guest-name-box justify-content-end">山内 京子 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">山内 一伸 様</div>
+                                                <div class="guest-name-box">山内 海音 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Bottom Right -->
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">坂田 ハツエ 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box justify-content-end">関野 房良 様</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">坂田 隆正 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box">関野 美子 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="text-end mt-5">
+                                <p class="serif-font mb-0" style="letter-spacing: 0.2em;">結婚披露宴列席者御席次表</p>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="text-center mt-5">
