@@ -69,6 +69,14 @@ a:hover {
     color: var(--color-accent) !important;
 }
 
+.text-primary {
+    color: var(--color-primary) !important;
+}
+
+.text-secondary {
+    color: var(--color-secondary) !important;
+}
+
 /* Slideshow Styles */
 .hero-slideshow {
     position: absolute;
