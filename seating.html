@@ -251,13 +251,14 @@
 
         .guest-list-col {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            /* Horizontal row for vertical names */
             gap: 4px;
-            min-width: 140px;
-            /* Match table width approx */
+            min-width: auto;
             flex-grow: 1;
-            align-items: center;
-            /* Center align items */
+            align-items: flex-start;
+            /* Align to start */
+            justify-content: center;
         }
 
         .guest-name-box {
@@ -267,13 +268,20 @@
             border-radius: 3px;
             font-size: 0.75rem;
             white-space: nowrap;
-            height: 24px;
+            writing-mode: vertical-rl;
+            /* Vertical text */
+            text-orientation: upright;
+            /* Characters upright */
+            height: auto;
+            /* Auto height for vertical */
+            width: 24px;
+            /* Fixed width for vertical layout */
+            min-height: 80px;
+            /* Min height to accommodate names */
             display: flex;
             align-items: center;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
             justify-content: center;
-            width: 100%;
-            /* Full width of list */
         }
 
         .guest-name-box.empty {
