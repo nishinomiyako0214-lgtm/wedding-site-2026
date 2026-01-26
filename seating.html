@@ -183,8 +183,9 @@
 
         /* Column 2: Row 1 (2 Tables) */
         .column-row1 {
-            width: 350px;
-            min-width: 300px;
+            width: 200px;
+            /* Narrower for vertical tables */
+            min-width: 180px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -194,8 +195,9 @@
 
         /* Column 3: Row 2 (6 Tables) */
         .column-row2 {
-            width: 350px;
-            min-width: 300px;
+            width: 200px;
+            /* Narrower */
+            min-width: 180px;
             display: flex;
             flex-direction: column;
             gap: 40px;
@@ -210,9 +212,11 @@
             width: 100%;
         }
 
-        /* Rectangular Guest Table Styles */
+        /* Rectangular Guest Table Styles (Rotated 90 Left -> Vertical Layout) */
         .guest-table-rect {
             display: flex;
+            flex-direction: column;
+            /* Vertical stack */
             justify-content: center;
             align-items: center;
             gap: 10px;
@@ -220,30 +224,40 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            width: 100%;
+            width: fit-content;
+            /* Fit content to avoid too wide */
+            min-width: 160px;
+            margin: 0 auto;
         }
 
         .table-rect-center {
-            width: 30px;
-            height: 120px;
+            width: 140px;
+            /* Wider */
+            height: 30px;
+            /* Shorter (Horizontal Bar) */
             border: 1px solid var(--color-primary);
             background-color: #f0e6d2;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            writing-mode: vertical-rl;
+            writing-mode: horizontal-tb;
+            /* Horizontal text */
             font-size: 1rem;
             color: var(--color-primary);
             flex-shrink: 0;
+            margin: 5px 0;
         }
 
         .guest-list-col {
             display: flex;
             flex-direction: column;
             gap: 4px;
-            min-width: 90px;
+            min-width: 140px;
+            /* Match table width approx */
             flex-grow: 1;
+            align-items: center;
+            /* Center align items */
         }
 
         .guest-name-box {
@@ -258,19 +272,21 @@
             align-items: center;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
             justify-content: center;
+            width: 100%;
+            /* Full width of list */
         }
 
         .guest-name-box.empty {
             display: none !important;
         }
 
-        /* Alignment overrides */
+        /* Alignment overrides - Reset to center for vertical layout */
         .guest-list-col.text-end .guest-name-box {
-            justify-content: flex-end;
+            justify-content: center;
         }
 
         .guest-list-col.text-start .guest-name-box {
-            justify-content: flex-start;
+            justify-content: center;
         }
 
         /* Table Label Circle */
