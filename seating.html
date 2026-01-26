@@ -134,132 +134,124 @@
         .seating-chart-container {
             font-family: "Noto Serif JP", serif;
             color: #555;
-            overflow: auto;
-            /* Allow scrolling in both directions if needed */
-            border: 1px solid #eee;
-            background-color: #fcfcfc;
-            /* Force a minimum size to trigger scroll on mobile */
-            min-height: 600px;
-        }
-
-        .seating-map-wrapper {
-            display: flex;
-            flex-direction: row;
-            padding: 40px;
-            width: max-content;
-            /* Allow content to dictate width */
-            min-width: 100%;
-        }
-
-        .column-main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-right: 60px;
-            position: sticky;
-            left: 0;
-            background-color: #fcfcfc;
-            /* Hide scroll content behind */
-            z-index: 10;
-            padding: 20px;
-            border-right: 1px dashed #ddd;
-        }
-
-        .column-guests {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 60px;
-            /* Space between Bride and Groom rows */
-        }
-
-        .guest-row {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        /* Adjust Table Styles */
-        .guest-table-rect {
-            margin-bottom: 0;
-            /* Remove bottom margin in this layout */
-            background: #fff;
-            padding: 10px;
+            background-color: #f8f1e5;
+            /* Light beige bg */
+            padding: 30px 10px;
             border-radius: 8px;
-            /* shadow included in name boxes? */
+            overflow-x: hidden;
+            /* No horizontal scroll */
         }
 
-        .section-label {
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            font-size: 1.2rem;
-            letter-spacing: 0.5em;
-            color: var(--color-primary);
-            border-right: 2px solid var(--color-accent);
-            padding-right: 10px;
-            margin-right: 20px;
-            height: 200px;
-            text-align: center;
-        }
-
-        .main-table-vertical {
-            width: 60px;
-            height: 200px;
-            border: 3px solid var(--color-primary);
-            background: #fff;
+        /* Main Table Tagasago */
+        .main-table-section {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .main-table-rect {
+            width: 180px;
+            height: 70px;
+            border: 2px solid var(--color-primary);
+            background-color: #fff;
+            margin-bottom: 10px;
+        }
+
+        /* Guest Table Wrapper */
+        .guest-table-wrapper {
+            margin-bottom: 40px;
+            display: flex;
             justify-content: center;
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            margin-left: 20px;
         }
 
-        /* Custom scrollbar for seating chart */
-        .seating-chart-container::-webkit-scrollbar {
-            height: 8px;
+        /* Rectangular Guest Table Styles */
+        .guest-table-rect {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            /* Tighter gap for mobile */
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transform: scale(0.9);
+            /* Slightly smaller to fit 6 in a row if possible, or just responsive */
+            width: 100%;
+            /* Fill col */
+            max-width: 350px;
+            /* Max width */
         }
 
-        .seating-chart-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .seating-chart-container::-webkit-scrollbar-thumb {
-            background: #ccc;
+        .table-rect-center {
+            width: 25px;
+            height: 100px;
+            /* Slightly shorter */
+            border: 1px solid var(--color-primary);
+            background-color: #f0e6d2;
             border-radius: 4px;
-        }
-
-        .seating-chart-container::-webkit-scrollbar-thumb:hover {
-            background: #bbb;
-        }
-
-        #auth-container {
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 100px);
-            /* フッターなどを除く高さ */
-            text-align: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            font-size: 1rem;
+            color: var(--color-primary);
+            flex-shrink: 0;
         }
 
-        .mobile-header {
+        .guest-list-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 80px;
+            flex-grow: 1;
+        }
+
+        .guest-name-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 3px 5px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            /* Smaller font */
+            white-space: nowrap;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+            justify-content: center;
+            /* Center text locally */
+        }
+
+        /* Hide Empty Seats */
+        .guest-name-box.empty {
             display: none !important;
-            /* 初期表示ではヘッダーを隠す */
         }
 
-        #seating-content {
-            display: none;
-            /* 初期表示ではコンテンツを隠す */
-            padding-top: 100px;
-            /* ヘッダーが表示された時の調整 */
+        /* Specific alignment overrides */
+        .guest-list-col.text-end .guest-name-box {
+            justify-content: flex-end;
         }
 
-        .auth-error {
-            color: #dc3545;
-            margin-top: 1rem;
+        .guest-list-col.text-start .guest-name-box {
+            justify-content: flex-start;
+        }
+
+        /* Responsive Table Label Circle */
+        .table-label-circle {
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border: 1px solid var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-en);
+            margin: 0 auto 10px;
+            font-weight: bold;
+            color: var(--color-primary);
         }
     </style>
 </head>
@@ -351,170 +343,213 @@
                             当日の会場のテーブル配置図です。ご自身のテーブルをご確認ください。
                         </p>
 
-                        <!-- Seating Chart Container (Horizontal Scroll) -->
+                        <!-- Seating Chart Container (Vertical Responsive) -->
                         <div class="seating-chart-container">
 
-                            <div class="seating-map-wrapper">
-                                <!-- Left: Main Table & Header -->
-                                <div class="column-main shadow-sm">
-                                    <h2 class="serif-font mb-4"
-                                        style="color: var(--color-primary); writing-mode: vertical-rl; text-orientation: sideways;">
-                                        DAI & KANAKO</h2>
-                                    <div class="main-table-vertical">
-                                        高砂
-                                    </div>
-                                    <div class="mt-4 small text-muted"
-                                        style="writing-mode: vertical-rl; text-orientation: upright;">
-                                        2026年2月23日
+                            <!-- Header: Main Table (Takasago) -->
+                            <div class="main-table-section text-center">
+                                <h2 class="serif-font mb-3" style="color: var(--color-primary); letter-spacing: 0.1em;">
+                                    DAI & KANAKO</h2>
+                                <div class="main-table-rect"></div>
+                                <div class="mt-2 text-muted serif-font">高砂</div>
+                            </div>
+
+                            <hr class="mb-5" style="border-top: 1px dashed var(--color-primary); opacity: 0.3;">
+
+                            <!-- Connection Line / Aisle (Invisible spacer or actual line could be added) -->
+
+                            <!-- Row 1: Top Tables (Groom & Bride) -->
+                            <div class="row justify-content-center mb-5">
+                                <!-- Groom Top (Left) -->
+                                <div class="col-md-5 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">戎井 典子 様</div>
+                                                <div class="guest-name-box justify-content-end">戎井 裕城 様</div>
+                                                <div class="guest-name-box justify-content-end">中野 佳昭 様</div>
+                                                <div class="guest-name-box justify-content-end">中野 雅子 様</div>
+                                            </div>
+                                            <div class="table-rect-center"><i class="fas fa-utensils small op-50"></i>
+                                            </div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">戎井 康史 様</div>
+                                                <div class="guest-name-box">戎井 康城 様</div>
+                                                <div class="guest-name-box">戎井 早織 様</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Right: Guest Tables -->
-                                <div class="column-guests">
-
-                                    <!-- Top Row: Bride Side -->
-                                    <div class="d-flex align-items-center">
-                                        <div class="section-label">新婦側</div>
-                                        <div class="guest-row">
-                                            <!-- Top Table (Center Top in original) -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">勝俣 楓花 様</div>
-                                                    <div class="guest-name-box justify-content-end">谷川 栞 様</div>
-                                                    <div class="guest-name-box justify-content-end">阿部 明 様</div>
-                                                    <div class="guest-name-box justify-content-end">玉木 美佳 様</div>
-                                                </div>
-                                                <div class="table-rect-center">
-                                                    <i class="fas fa-utensils small op-50"></i>
-                                                </div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">大辻 佳輝 様</div>
-                                                    <div class="guest-name-box">嶋村 直生 様</div>
-                                                    <div class="guest-name-box">五十嵐 潤 様</div>
-                                                </div>
+                                <!-- Bride Top (Right) -->
+                                <div class="col-md-5 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">勝俣 楓花 様</div>
+                                                <div class="guest-name-box justify-content-end">谷川 栞 様</div>
+                                                <div class="guest-name-box justify-content-end">阿部 明 様</div>
+                                                <div class="guest-name-box justify-content-end">玉木 美佳 様</div>
                                             </div>
-
-                                            <!-- Bottom Tables x3 (Moved to side) -->
-                                            <!-- B1 -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">佐藤 菜々子 様</div>
-                                                    <div class="guest-name-box justify-content-end">馬目 帆乃香 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                </div>
-                                                <div class="table-rect-center"></div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">佐治 朋夏 様</div>
-                                                    <div class="guest-name-box">鈴木 芹香 様</div>
-                                                    <div class="guest-name-box">守田 彩音 様</div>
-                                                </div>
+                                            <div class="table-rect-center"><i class="fas fa-utensils small op-50"></i>
                                             </div>
-                                            <!-- B2 -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">関野 あい子 様</div>
-                                                    <div class="guest-name-box justify-content-end">山内 京子 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                </div>
-                                                <div class="table-rect-center"></div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">山内 一伸 様</div>
-                                                    <div class="guest-name-box">山内 海音 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                </div>
-                                            </div>
-                                            <!-- B3 -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">坂田 ハツエ 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                    <div class="guest-name-box justify-content-end">関野 房良 様</div>
-                                                </div>
-                                                <div class="table-rect-center"></div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">坂田 隆正 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                    <div class="guest-name-box">関野 美子 様</div>
-                                                </div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">大辻 佳輝 様</div>
+                                                <div class="guest-name-box">嶋村 直生 様</div>
+                                                <div class="guest-name-box">五十嵐 潤 様</div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Bottom Row: Groom Side -->
-                                    <div class="d-flex align-items-center">
-                                        <div class="section-label">新郎側</div>
-                                        <div class="guest-row">
-                                            <!-- Top Table -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">戎井 典子 様</div>
-                                                    <div class="guest-name-box justify-content-end">戎井 裕城 様</div>
-                                                    <div class="guest-name-box justify-content-end">中野 佳昭 様</div>
-                                                    <div class="guest-name-box justify-content-end">中野 雅子 様</div>
-                                                </div>
-                                                <div class="table-rect-center">
-                                                    <i class="fas fa-utensils small op-50"></i>
-                                                </div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">戎井 康史 様</div>
-                                                    <div class="guest-name-box">戎井 康城 様</div>
-                                                    <div class="guest-name-box">戎井 早織 様</div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Bottom Tables x3 -->
-                                            <!-- G1 -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">中野 實 様</div>
-                                                    <div class="guest-name-box justify-content-end">中野 美代子 様</div>
-                                                    <div class="guest-name-box justify-content-end">安川 力 様</div>
-                                                    <div class="guest-name-box justify-content-end">安川 圭子 様</div>
-                                                </div>
-                                                <div class="table-rect-center"></div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">安川 敬明 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                    <div class="guest-name-box">安川 武男 様</div>
-                                                </div>
-                                            </div>
-                                            <!-- G2 -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">安川 かおり 様</div>
-                                                    <div class="guest-name-box justify-content-end">福山 雅人 様</div>
-                                                    <div class="guest-name-box justify-content-end">安川 将之 様</div>
-                                                    <div class="guest-name-box justify-content-end">安川 歩恭 様</div>
-                                                </div>
-                                                <div class="table-rect-center"></div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">安川 勝正 様</div>
-                                                    <div class="guest-name-box">福山 愛 様</div>
-                                                    <div class="guest-name-box">安川 翼 様</div>
-                                                </div>
-                                            </div>
-                                            <!-- G3 -->
-                                            <div class="guest-table-rect">
-                                                <div class="guest-list-col text-end">
-                                                    <div class="guest-name-box justify-content-end">竹本 昂平 様</div>
-                                                    <div class="guest-name-box justify-content-end">上田 裕貴 様</div>
-                                                    <div class="guest-name-box justify-content-end">川潟 優輝 様</div>
-                                                    <div class="guest-name-box empty">空席</div>
-                                                </div>
-                                                <div class="table-rect-center"></div>
-                                                <div class="guest-list-col text-start">
-                                                    <div class="guest-name-box">桑原 大知 様</div>
-                                                    <div class="guest-name-box">石田 悠人 様</div>
-                                                    <div class="guest-name-box">磯橋 優輝 様</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
+
+                            <!-- Row 2: Bottom Tables (6 Columns) -->
+                            <!-- Order: G1 - G2 - G3 - B1 - B2 - B3 -->
+                            <!-- However, user requested arrangement: Inner=Friends, Outer=Relatives/Matsuseki? -->
+                            <!-- Current data: 
+                                 G1: Nakano/Yasukawa (Parents/Rel) -> Should be outer left
+                                 G2: Yasukawa/Fukuyama (Rel) -> Middle left
+                                 G3: Takemoto/Ueda (Friends) -> Inner left
+                                 B1: Sato/Mamemoto (Friends) -> Inner right
+                                 B2: Sekino/Yamauchi (Rel) -> Middle right
+                                 B3: Sakata/Sekino (Rel) -> Outer right
+                            -->
+                            <div class="row justify-content-center">
+                                <!-- 1. Groom Outer (G1) -->
+                                <div class="col-lg-2 col-md-4 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">中野 實 様</div>
+                                                <div class="guest-name-box justify-content-end">中野 美代子 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 力 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 圭子 様</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">安川 敬明 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box">安川 武男 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2. Groom Middle (G2) -->
+                                <div class="col-lg-2 col-md-4 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">安川 かおり 様</div>
+                                                <div class="guest-name-box justify-content-end">福山 雅人 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 将之 様</div>
+                                                <div class="guest-name-box justify-content-end">安川 歩恭 様</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">安川 勝正 様</div>
+                                                <div class="guest-name-box">福山 愛 様</div>
+                                                <div class="guest-name-box">安川 翼 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Groom Inner (G3) -->
+                                <div class="col-lg-2 col-md-4 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">竹本 昂平 様</div>
+                                                <div class="guest-name-box justify-content-end">上田 裕貴 様</div>
+                                                <div class="guest-name-box justify-content-end">川潟 優輝 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">桑原 大知 様</div>
+                                                <div class="guest-name-box">石田 悠人 様</div>
+                                                <div class="guest-name-box">磯橋 優輝 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 4. Bride Inner (B1) -->
+                                <div class="col-lg-2 col-md-4 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">佐藤 菜々子 様</div>
+                                                <div class="guest-name-box justify-content-end">馬目 帆乃香 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">佐治 朋夏 様</div>
+                                                <div class="guest-name-box">鈴木 芹香 様</div>
+                                                <div class="guest-name-box">守田 彩音 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 5. Bride Middle (B2) -->
+                                <div class="col-lg-2 col-md-4 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">関野 あい子 様</div>
+                                                <div class="guest-name-box justify-content-end">山内 京子 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">山内 一伸 様</div>
+                                                <div class="guest-name-box">山内 海音 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 6. Bride Outer (B3) -->
+                                <div class="col-lg-2 col-md-4 col-12 guest-table-wrapper">
+                                    <div class="d-flex flex-column align-items-center w-100">
+                                        <div class="table-label-circle">A</div>
+                                        <div class="guest-table-rect">
+                                            <div class="guest-list-col text-end">
+                                                <div class="guest-name-box justify-content-end">坂田 ハツエ 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box justify-content-end">関野 房良 様</div>
+                                            </div>
+                                            <div class="table-rect-center"></div>
+                                            <div class="guest-list-col text-start">
+                                                <div class="guest-name-box">坂田 隆正 様</div>
+                                                <div class="guest-name-box empty">空席</div>
+                                                <div class="guest-name-box">関野 美子 様</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Legend / Note -->
+                            <div class="row mt-4">
+                                <div class="col-12 text-center">
+                                    <p class="serif-font small mb-0" style="letter-spacing: 0.2em;">結婚披露宴列席者御席次表</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
