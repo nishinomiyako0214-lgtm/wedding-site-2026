@@ -101,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Countdown Timer
     // ===========================================
     function startCountdown() {
-        // Confirm Date: 2026.02.23
-        const weddingDate = new Date("February 23, 2026 00:00:00").getTime();
+        // Confirm Date: 2026.02.23 10:00 AM
+        const weddingDate = new Date("February 23, 2026 10:00:00").getTime();
         const countdownElement = document.getElementById("timer-display");
 
         if (!countdownElement) return;
